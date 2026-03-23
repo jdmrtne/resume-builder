@@ -1,0 +1,239 @@
+/* ─── RESUME DOCUMENT BASE ───────────────────────────────────────────────── */
+.resume-doc {
+  width: 210mm; min-height: 297mm; background: #fff; padding: 0;
+  box-sizing: border-box; font-size: 11pt; line-height: 1.5; color: #1a1a1a;
+}
+
+/* ─── 1. CLASSIC ATS ────────────────────────────────────────────────────── */
+.tpl-classic { padding: 24mm 20mm; }
+.tpl-classic .cls-header { text-align: center; margin-bottom: 6mm; padding-bottom: 4mm; border-bottom: 2px solid #1a1a2e; }
+.tpl-classic h1 { font-size: 22pt; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 3px; }
+.tpl-classic .cls-title { font-size: 11pt; color: #4b5563; margin-bottom: 5px; }
+.tpl-classic .cls-contact { font-size: 9pt; color: #4b5563; }
+.tpl-classic .cls-section { margin-bottom: 5mm; }
+.tpl-classic .section-title { font-size: 10pt; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; padding-bottom: 3px; margin-bottom: 4mm; }
+.tpl-classic .cls-summary { font-size: 10pt; line-height: 1.6; color: #374151; }
+.tpl-classic .cls-entry { margin-bottom: 4mm; }
+.tpl-classic .cls-entry-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 2mm; }
+.tpl-classic .cls-entry-head strong { font-size: 10.5pt; }
+.tpl-classic .cls-date { font-size: 9pt; color: #6b7280; white-space: nowrap; }
+.tpl-classic ul { list-style: disc; padding-left: 14px; }
+.tpl-classic ul li { font-size: 9.5pt; color: #374151; margin-bottom: 2px; line-height: 1.5; }
+.tpl-classic .cls-honors { font-size: 9pt; color: #6b7280; font-style: italic; }
+.tpl-classic .cls-skills { font-size: 9.5pt; color: #374151; line-height: 1.8; }
+.tpl-classic .cls-tech { font-size: 9pt; color: #6b7280; font-style: italic; }
+.tpl-classic .cls-entry-inline { font-size: 9.5pt; margin-bottom: 3px; }
+.proj-link { font-size: 8pt; color: #4f46e5; }
+
+/* ─── 2. MODERN MINIMAL ─────────────────────────────────────────────────── */
+.tpl-modern { padding: 14mm 14mm; }
+.tpl-modern .mod-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 6mm; padding-bottom: 5mm; border-bottom: 1px solid #e5e7eb; }
+.tpl-modern h1 { font-size: 20pt; font-weight: 700; color: #111827; }
+.tpl-modern .mod-title { font-size: 10pt; color: var(--acc, #3b7cf4); font-weight: 600; margin-top: 3px; }
+.tpl-modern .mod-contact-block { text-align: right; font-size: 8.5pt; color: #6b7280; line-height: 1.8; }
+.tpl-modern .mod-summary { font-size: 9.5pt; color: #4b5563; line-height: 1.7; margin-bottom: 5mm; padding: 3mm; background: #f9fafb; border-radius: 4px; border-left: 3px solid var(--acc, #3b7cf4); }
+.tpl-modern .mod-section { margin-bottom: 5mm; }
+.tpl-modern h2 { font-size: 10pt; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--acc, #3b7cf4); margin-bottom: 3mm; }
+.tpl-modern .mod-entry { margin-bottom: 3.5mm; }
+.tpl-modern .mod-entry-row { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.5mm; }
+.tpl-modern .mod-role { font-weight: 700; font-size: 10pt; }
+.tpl-modern .mod-date { font-size: 8.5pt; color: #9ca3af; }
+.tpl-modern .mod-bullets { list-style: none; padding: 0; }
+.tpl-modern .mod-bullets li { font-size: 9pt; color: #4b5563; padding-left: 10px; position: relative; margin-bottom: 2px; }
+.tpl-modern .mod-bullets li::before { content: '→'; position: absolute; left: 0; color: var(--acc, #3b7cf4); font-size: 8pt; }
+.tpl-modern .mod-honors { font-size: 8.5pt; color: #6b7280; font-style: italic; }
+.tpl-modern .mod-skills-grid { display: flex; flex-direction: column; gap: 4px; }
+.tpl-modern .mod-skill-cat { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+.tpl-modern .mod-skill-label { font-size: 8pt; font-weight: 700; color: #6b7280; min-width: 70px; }
+.tpl-modern .mod-skill-tag { background: #f3f4f6; color: #374151; padding: 1px 8px; border-radius: 10px; font-size: 8pt; }
+.tpl-modern .mod-link { font-size: 8pt; color: var(--acc, #3b7cf4); }
+.tpl-modern .mod-tech-stack { font-size: 8pt; color: #6b7280; font-style: italic; }
+.tpl-modern .mod-certs { display: flex; flex-direction: column; gap: 3px; }
+.tpl-modern .mod-cert-item { font-size: 9pt; color: #374151; }
+
+/* ─── 3. CORPORATE ──────────────────────────────────────────────────────── */
+.tpl-corporate { }
+.tpl-corporate .corp-header { padding: 12mm 18mm; color: #fff; }
+.tpl-corporate .corp-header h1 { font-size: 22pt; font-weight: 700; }
+.tpl-corporate .corp-title { font-size: 11pt; opacity: 0.85; margin: 3px 0 10px; }
+.tpl-corporate .corp-contact { display: flex; flex-wrap: wrap; gap: 10px; font-size: 8.5pt; opacity: 0.9; }
+.tpl-corporate .corp-section { padding: 4mm 18mm; margin-bottom: 1mm; }
+.tpl-corporate .corp-sec-title { font-size: 9.5pt; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; padding-bottom: 2mm; border-bottom: 1px solid #e5e7eb; margin-bottom: 3mm; }
+.tpl-corporate .corp-summary { font-size: 9.5pt; color: #374151; line-height: 1.7; }
+.tpl-corporate .corp-entry { margin-bottom: 3.5mm; }
+.tpl-corporate .corp-entry-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.5mm; }
+.tpl-corporate .corp-pos { font-size: 10.5pt; font-weight: 700; }
+.tpl-corporate .corp-co { font-size: 9.5pt; color: #4b5563; }
+.tpl-corporate .corp-date { font-size: 8.5pt; font-weight: 600; }
+.tpl-corporate .corp-bullets { list-style: disc; padding-left: 14px; }
+.tpl-corporate .corp-bullets li { font-size: 9pt; margin-bottom: 2px; color: #374151; }
+.tpl-corporate .corp-skills { display: flex; flex-wrap: wrap; gap: 6px; }
+.tpl-corporate .corp-skill { padding: 2px 12px; border: 1px solid; border-radius: 3px; font-size: 8.5pt; font-weight: 600; }
+.tpl-corporate .corp-certs span { display: block; font-size: 9pt; color: #374151; margin-bottom: 3px; }
+
+/* ─── 4. CREATIVE ───────────────────────────────────────────────────────── */
+.tpl-creative { display: flex; min-height: 297mm; }
+.tpl-creative .cre-sidebar { width: 68mm; padding: 16mm 10mm; color: #fff; flex-shrink: 0; }
+.tpl-creative .cre-avatar { width: 56px; height: 56px; background: rgba(255,255,255,0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 18pt; font-weight: 800; margin: 0 auto 10px; }
+.tpl-creative h1.cre-name { font-size: 16pt; font-weight: 800; text-align: center; margin-bottom: 3px; }
+.tpl-creative .cre-role { font-size: 9pt; opacity: 0.85; text-align: center; margin-bottom: 10mm; }
+.tpl-creative .cre-contact { font-size: 8pt; opacity: 0.85; line-height: 2; margin-bottom: 8mm; }
+.tpl-creative .cre-contact div { margin-bottom: 4px; }
+.tpl-creative .cre-skills h3 { font-size: 8.5pt; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 6px; opacity: 0.8; }
+.tpl-creative .cre-skill-bar { background: rgba(255,255,255,0.15); border-radius: 3px; padding: 3px 8px; font-size: 8pt; margin-bottom: 4px; }
+.tpl-creative .cre-main { flex: 1; padding: 14mm 12mm; }
+.tpl-creative .cre-section { margin-bottom: 5mm; }
+.tpl-creative h2 { font-size: 11pt; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 3mm; color: var(--acc, #7c3aed); }
+.tpl-creative .cre-entry { display: flex; gap: 8px; margin-bottom: 3.5mm; }
+.tpl-creative .cre-entry-dot { width: 8px; height: 8px; background: var(--acc, #7c3aed); border-radius: 50%; margin-top: 5px; flex-shrink: 0; }
+.tpl-creative .cre-entry-body { flex: 1; }
+.tpl-creative .cre-entry-body strong { font-size: 10pt; }
+.tpl-creative .cre-date { font-size: 8.5pt; color: #9ca3af; }
+.tpl-creative ul { list-style: disc; padding-left: 12px; }
+.tpl-creative ul li { font-size: 8.5pt; color: #4b5563; margin-bottom: 2px; }
+.tpl-creative .cre-project { margin-bottom: 3mm; padding: 3mm; background: #f9fafb; border-radius: 6px; }
+.tpl-creative .cre-project strong { font-size: 9.5pt; }
+.tpl-creative .cre-tech { font-size: 8pt; color: #9ca3af; margin-top: 3px; }
+
+/* ─── 5. GRADUATE ───────────────────────────────────────────────────────── */
+.tpl-graduate { padding: 20mm 22mm; }
+.tpl-graduate .grad-header { text-align: center; margin-bottom: 4mm; }
+.tpl-graduate h1 { font-size: 22pt; font-weight: 700; }
+.tpl-graduate .grad-title { font-size: 11pt; color: #4b5563; margin: 3px 0 5px; }
+.tpl-graduate .grad-contact { font-size: 9pt; color: #6b7280; }
+.tpl-graduate .grad-line { height: 3px; margin: 5mm 0; border-radius: 2px; }
+.tpl-graduate .grad-section { margin-bottom: 5mm; }
+.tpl-graduate h2 { font-size: 10pt; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 2.5mm; padding-bottom: 1.5mm; border-bottom: 1px solid #e5e7eb; }
+.tpl-graduate .grad-entry { margin-bottom: 3.5mm; }
+.tpl-graduate .grad-row { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1mm; }
+.tpl-graduate .grad-row span { font-size: 9pt; color: #6b7280; }
+.tpl-graduate ul { list-style: disc; padding-left: 14px; }
+.tpl-graduate ul li { font-size: 9.5pt; color: #374151; margin-bottom: 2px; }
+
+/* ─── 6. EXECUTIVE ──────────────────────────────────────────────────────── */
+.tpl-executive { padding: 24mm 24mm; }
+.tpl-executive .exec-header { text-align: center; margin-bottom: 8mm; }
+.tpl-executive h1 { font-size: 26pt; font-weight: 700; letter-spacing: -0.02em; }
+.tpl-executive .exec-title { font-size: 12pt; color: var(--acc, #8b0000); letter-spacing: 0.15em; text-transform: uppercase; margin: 5px 0; }
+.tpl-executive .exec-rule { border-top: 2.5px solid; margin: 5mm 20mm; }
+.tpl-executive .exec-contact { font-size: 9pt; color: #6b7280; letter-spacing: 0.03em; }
+.tpl-executive .exec-section { margin-bottom: 6mm; }
+.tpl-executive h2 { font-size: 10pt; font-weight: 700; text-transform: uppercase; letter-spacing: 0.15em; margin-bottom: 4mm; }
+.tpl-executive .exec-summary { font-size: 10pt; color: #374151; line-height: 1.8; font-style: italic; }
+.tpl-executive .exec-entry { margin-bottom: 5mm; }
+.tpl-executive .exec-entry-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 2mm; }
+.tpl-executive .exec-co { font-size: 10.5pt; }
+.tpl-executive .exec-date { font-size: 9pt; color: #6b7280; }
+.tpl-executive .exec-bullets { list-style: none; padding: 0; }
+.tpl-executive .exec-bullets li { font-size: 9.5pt; padding-left: 12px; position: relative; margin-bottom: 3px; color: #374151; }
+.tpl-executive .exec-bullets li::before { content: '▸'; position: absolute; left: 0; color: var(--acc, #8b0000); }
+.tpl-executive .exec-edu { font-size: 9.5pt; color: #374151; margin-bottom: 3px; }
+.tpl-executive .exec-skills { display: flex; flex-wrap: wrap; gap: 8px; }
+.tpl-executive .exec-skill { font-size: 9pt; color: #374151; }
+.tpl-executive .exec-skill::after { content: ' ·'; color: var(--acc, #8b0000); }
+.tpl-executive .exec-skill:last-child::after { content: ''; }
+.tpl-executive .exec-cert { font-size: 9pt; color: #374151; margin-bottom: 3px; }
+
+/* ─── 7. TECH DEVELOPER ─────────────────────────────────────────────────── */
+.tpl-tech { background: #0d1117; color: #c9d1d9; }
+.tpl-tech .tech-header { background: #161b22; padding: 10mm 14mm; border-bottom: 1px solid #30363d; }
+.tpl-tech .tech-terminal-bar { display: flex; gap: 5px; margin-bottom: 10px; }
+.tpl-tech .tech-terminal-bar span { width: 10px; height: 10px; border-radius: 50%; background: #ff5f57; }
+.tpl-tech .tech-terminal-bar span:nth-child(2) { background: #ffbd2e; }
+.tpl-tech .tech-terminal-bar span:nth-child(3) { background: #28ca40; }
+.tpl-tech .tech-name-line { display: flex; align-items: center; gap: 8px; margin-bottom: 4px; }
+.tpl-tech h1 { font-size: 20pt; font-weight: 700; color: #e6edf3; font-family: 'Courier New', monospace; }
+.tpl-tech .tech-title { font-size: 10pt; margin-bottom: 6px; letter-spacing: 0.05em; font-family: 'Courier New', monospace; }
+.tpl-tech .tech-contact { font-size: 8.5pt; color: #8b949e; line-height: 1.8; font-family: 'Courier New', monospace; }
+.tpl-tech .tech-section { padding: 5mm 14mm; border-bottom: 1px solid #21262d; }
+.tpl-tech .tech-sec-title { font-size: 8.5pt; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 3mm; font-family: 'Courier New', monospace; }
+.tpl-tech .tech-summary { font-size: 9pt; color: #8b949e; line-height: 1.7; font-family: 'Courier New', monospace; }
+.tpl-tech .tech-skills-grid { display: flex; flex-direction: column; gap: 5px; }
+.tpl-tech .tech-skill-group { display: flex; align-items: flex-start; gap: 8px; }
+.tpl-tech .tech-skill-label { font-size: 8pt; font-weight: 700; min-width: 90px; flex-shrink: 0; font-family: 'Courier New', monospace; }
+.tpl-tech .tech-tags { display: flex; flex-wrap: wrap; gap: 4px; }
+.tpl-tech .tech-tag { padding: 1px 8px; border: 1px solid; border-radius: 3px; font-size: 8pt; color: inherit; }
+.tpl-tech .tech-entry { margin-bottom: 4mm; }
+.tpl-tech .tech-entry-head { margin-bottom: 1.5mm; }
+.tpl-tech .tech-func { font-size: 9pt; font-style: italic; color: #79c0ff; }
+.tpl-tech .tech-entry-head strong { font-size: 10.5pt; color: #e6edf3; }
+.tpl-tech .tech-co { font-size: 9pt; color: #8b949e; }
+.tpl-tech .tech-date { font-size: 8.5pt; color: #6e7681; float: right; }
+.tpl-tech .tech-bullets { list-style: none; padding: 0; }
+.tpl-tech .tech-bullets li { font-size: 9pt; color: #8b949e; padding-left: 12px; position: relative; margin-bottom: 2px; }
+.tpl-tech .tech-bullets li::before { content: '>'; position: absolute; left: 0; color: var(--acc, #00d4aa); }
+.tpl-tech .tech-proj-head { margin-bottom: 1.5mm; }
+.tpl-tech .tech-proj-head strong { color: #e6edf3; font-size: 10pt; }
+.tpl-tech .tech-link { font-size: 8pt; }
+.tpl-tech .tech-stack { font-size: 8.5pt; margin-bottom: 2px; }
+.tpl-tech .tech-entry-inline { font-size: 9pt; margin-bottom: 3px; color: #8b949e; }
+
+/* ─── 8. MARKETING PRO ──────────────────────────────────────────────────── */
+.tpl-marketing { padding: 16mm 18mm; }
+.tpl-marketing .mkt-header { padding-left: 12px; margin-bottom: 6mm; }
+.tpl-marketing h1 { font-size: 24pt; font-weight: 800; text-transform: uppercase; letter-spacing: -0.02em; }
+.tpl-marketing .mkt-title { font-size: 11pt; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; margin: 3px 0 6px; }
+.tpl-marketing .mkt-contact { font-size: 8.5pt; color: #6b7280; }
+.tpl-marketing .mkt-section { margin-bottom: 5mm; }
+.tpl-marketing h2 { font-size: 10pt; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 3mm; padding-bottom: 2px; }
+.tpl-marketing .mkt-summary { font-size: 10pt; color: #4b5563; line-height: 1.7; }
+.tpl-marketing .mkt-entry { margin-bottom: 3.5mm; }
+.tpl-marketing .mkt-entry-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.5mm; }
+.tpl-marketing .mkt-date { font-size: 8.5pt; font-weight: 600; }
+.tpl-marketing .mkt-bullets { list-style: disc; padding-left: 14px; }
+.tpl-marketing .mkt-bullets li { font-size: 9pt; color: #374151; margin-bottom: 2px; }
+.tpl-marketing .mkt-skills { display: flex; flex-wrap: wrap; gap: 5px; }
+.tpl-marketing .mkt-skill { padding: 2px 10px; border-radius: 3px; font-size: 8pt; font-weight: 700; color: #fff; }
+.tpl-marketing .mkt-entry-inline { font-size: 9.5pt; margin-bottom: 3px; }
+
+/* ─── 9. DESIGNER PORTFOLIO ─────────────────────────────────────────────── */
+.tpl-designer { padding: 0; }
+.tpl-designer .des-header { display: flex; align-items: center; gap: 16mm; padding: 10mm 14mm 8mm; border-bottom: 2px solid #f3f4f6; }
+.tpl-designer .des-avatar { width: 56px; height: 56px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 18pt; font-weight: 800; color: #fff; flex-shrink: 0; }
+.tpl-designer h1 { font-size: 20pt; font-weight: 700; }
+.tpl-designer .des-title { font-size: 10pt; color: var(--acc, #f97316); font-weight: 600; margin: 3px 0; }
+.tpl-designer .des-contact { font-size: 8.5pt; color: #6b7280; }
+.tpl-designer .des-body { display: flex; }
+.tpl-designer .des-left { width: 54mm; background: #f9fafb; padding: 8mm 8mm; border-right: 1px solid #e5e7eb; }
+.tpl-designer .des-right { flex: 1; padding: 8mm 10mm; }
+.tpl-designer .des-section { margin-bottom: 5mm; }
+.tpl-designer h2 { font-size: 10pt; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: #1f2937; margin-bottom: 3mm; }
+.tpl-designer .des-skill-cat { margin-bottom: 3mm; }
+.tpl-designer .des-skill-cat h3 { font-size: 8.5pt; font-weight: 700; color: #6b7280; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 4px; }
+.tpl-designer .des-skill-bar { display: flex; align-items: center; gap: 5px; margin-bottom: 4px; }
+.tpl-designer .des-skill-fill { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+.tpl-designer .des-skill-bar span:last-child { font-size: 8.5pt; color: #374151; }
+.tpl-designer .des-entry { margin-bottom: 3.5mm; }
+.tpl-designer .des-entry strong { font-size: 10pt; display: block; margin-bottom: 1mm; }
+.tpl-designer .des-date { font-size: 8.5pt; color: var(--acc, #f97316); display: block; margin-bottom: 1.5mm; }
+.tpl-designer ul { list-style: disc; padding-left: 12px; }
+.tpl-designer ul li { font-size: 8.5pt; color: #4b5563; margin-bottom: 2px; }
+.tpl-designer .des-project { margin-bottom: 3mm; padding-left: 8px; }
+.tpl-designer .des-project strong { font-size: 10pt; display: block; }
+.tpl-designer .des-project p { font-size: 8.5pt; color: #4b5563; margin-top: 2px; }
+.tpl-designer .des-tech { font-size: 8pt; color: #9ca3af; font-style: italic; }
+
+/* ─── 10. COMPACT ONE-PAGE ──────────────────────────────────────────────── */
+.tpl-compact { padding: 10mm 14mm; }
+.tpl-compact .cmp-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 3mm; padding-bottom: 3mm; border-bottom: 2px solid var(--acc, #0f766e); }
+.tpl-compact h1 { font-size: 16pt; font-weight: 800; margin-bottom: 2px; }
+.tpl-compact .cmp-title { font-size: 9pt; font-weight: 600; }
+.tpl-compact .cmp-contact { text-align: right; font-size: 7.5pt; color: #6b7280; line-height: 1.8; }
+.tpl-compact .cmp-contact span { display: block; }
+.tpl-compact .cmp-section { margin-bottom: 2.5mm; padding-bottom: 2mm; border-bottom: 1px solid #f3f4f6; display: flex; gap: 4mm; }
+.tpl-compact .cmp-label { font-size: 7.5pt; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; min-width: 20mm; flex-shrink: 0; padding-top: 2px; }
+.tpl-compact .cmp-section > div, .tpl-compact .cmp-section > p { flex: 1; }
+.tpl-compact .cmp-section p { font-size: 8pt; color: #374151; line-height: 1.5; flex: 1; }
+.tpl-compact .cmp-entry { flex: 1; margin-bottom: 2mm; }
+.tpl-compact .cmp-row { display: flex; justify-content: space-between; align-items: baseline; }
+.tpl-compact .cmp-row span { font-size: 7.5pt; color: #9ca3af; }
+.tpl-compact .cmp-bullets { list-style: disc; padding-left: 12px; }
+.tpl-compact .cmp-bullets li { font-size: 8pt; color: #4b5563; margin-bottom: 1px; }
+
+/* ─── NO DATA PLACEHOLDER ────────────────────────────────────────────────── */
+.no-data {
+  display: flex; align-items: center; justify-content: center;
+  min-height: 297mm; font-size: 11pt; color: #9ca3af;
+  text-align: center; flex-direction: column; gap: 8px;
+}
+.no-data::before { content: '📝'; font-size: 32pt; }
