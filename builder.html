@@ -608,21 +608,27 @@
       if (slider) slider.value = val;
       if (label) label.textContent = val + '%';
       var scale = val / 100;
-      if (container) {
-        container.style.setProperty('--preview-scale', scale);
-        container.style.width     = (A4W * scale) + 'px';
-        container.style.minHeight = (A4H * scale) + 'px';
-      }
+
+      // Only scale the paper (wrapper), never touch the container size.
+      // The scroll area stays fixed — only the A4 sheet zooms inside it.
       if (wrapper) {
-        wrapper.style.setProperty('--preview-scale', scale);
         wrapper.style.transform = 'scale(' + scale + ')';
+        wrapper.style.transformOrigin = 'top center';
+        // Collapse the whitespace below the scaled-down paper
+        wrapper.style.marginBottom = Math.round((A4H * scale) - A4H) + 'px';
+      }
+      // Keep container wide enough to show the paper at its natural width
+      if (container) {
+        container.style.width = Math.round(A4W * scale) + 'px';
+        container.style.height = Math.round(A4H * scale) + 'px';
       }
     }
 
-    // Initial fit
+    // Initial fit — called once on load then user controls with slider
     function fitToWindow() {
       var s = calcFitScale();
-      applyZoom(Math.round(s * 100));
+      var pct = Math.round(s * 100 / 5) * 5; // snap to nearest 5%
+      applyZoom(Math.max(40, Math.min(100, pct)));
     }
 
     if (slider)  slider.addEventListener('input', function() { applyZoom(parseInt(this.value)); });

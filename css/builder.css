@@ -140,31 +140,38 @@
 
 /* ─── CENTER PANEL (PREVIEW) ──────────────────────────────────────────────── */
 .builder-center {
-  /* Isolated column - overflow hidden so scaled content never bleeds into right panel */
   background: #cbd5e1;
   display: flex; flex-direction: column;
-  overflow: hidden;        /* KEY: clips scaled content, prevents layout bleed */
+  overflow: hidden;
   position: relative;
-  min-width: 0;            /* prevents grid blowout */
+  min-width: 0;
 }
 .preview-scroll-area {
-  flex: 1; overflow-y: auto; overflow-x: hidden;
-  display: flex; flex-direction: column; align-items: center;
-  padding: 24px 24px 16px;
+  /* This is the VIEWPORT — it never resizes, only its contents scroll */
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 32px 24px 16px;
   min-width: 0;
 }
 .preview-scale-container {
-  --preview-scale: 0.7;
-  /* These are set by JS - just provide defaults */
-  width: calc(794px * 0.7);
-  min-height: calc(1123px * 0.7);
+  /* Sized by JS to match scaled paper dimensions — gives scroll the right height */
   flex-shrink: 0;
+  display: flex;
+  justify-content: center;
 }
 .preview-wrapper {
-  background: #fff; width: 210mm; min-height: 297mm;
+  /* The A4 paper — ONLY this element scales via transform */
+  background: #fff;
+  width: 210mm;   /* always 794px — never changes */
+  min-height: 297mm;
   box-shadow: 0 4px 24px rgba(0,0,0,.18);
-  transform-origin: top left;
-  transform: scale(var(--preview-scale, 0.7));
+  transform-origin: top center;
+  /* transform set by JS */
+  flex-shrink: 0;
   position: relative;
 }
 #resume-preview { width: 100%; min-height: 297mm; }
