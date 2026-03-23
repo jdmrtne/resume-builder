@@ -327,5 +327,29 @@
       document.getElementById('panel-ats').addEventListener('transitionend', updateATSPanel);
     });
   </script>
+
+  <script>
+  // Auto-hide sidebar
+  (function() {
+    var sb = document.querySelector(".sidebar");
+    if (!sb) return;
+    function expand() {
+      sb.style.width = "240px";
+      document.querySelectorAll(".main-content,.builder-body").forEach(function(el){ el.style.marginLeft="240px"; });
+      document.querySelectorAll(".builder-topbar").forEach(function(el){ el.style.left="240px"; });
+      sb.querySelectorAll(".logo-text,.user-email,#btn-logout").forEach(function(el){ el.style.opacity="1"; el.style.pointerEvents="auto"; });
+      sb.querySelectorAll(".nav-item span:not(.nav-icon)").forEach(function(el){ el.style.opacity="1"; });
+    }
+    function collapse() {
+      sb.style.width = "56px";
+      document.querySelectorAll(".main-content,.builder-body").forEach(function(el){ el.style.marginLeft="56px"; });
+      document.querySelectorAll(".builder-topbar").forEach(function(el){ el.style.left="56px"; });
+      sb.querySelectorAll(".logo-text,.user-email,#btn-logout").forEach(function(el){ el.style.opacity="0"; el.style.pointerEvents="none"; });
+      sb.querySelectorAll(".nav-item span:not(.nav-icon)").forEach(function(el){ el.style.opacity="0"; });
+    }
+    sb.addEventListener("mouseenter", expand);
+    sb.addEventListener("mouseleave", collapse);
+  })();
+  </script>
 </body>
 </html>

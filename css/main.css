@@ -291,3 +291,39 @@ h1,h2,h3,h4 { font-family: var(--font-heading); line-height: 1.2; }
   .sidebar .logo-text, .sidebar .nav-item span, .sidebar .user-email { display: none; }
   .main-content { margin-left: 64px; padding: 20px; }
 }
+
+/* ─── AUTO-HIDE SIDEBAR ──────────────────────────────────────────────────── */
+.sidebar {
+  width: 56px;
+  transition: width 0.25s cubic-bezier(.4,0,.2,1);
+  overflow: hidden;
+}
+.sidebar:hover {
+  width: 240px;
+}
+/* Hide text labels when collapsed */
+.sidebar .logo-text,
+.sidebar .nav-item span:not(.nav-icon),
+.sidebar .user-email,
+.sidebar #btn-logout {
+  opacity: 0;
+  white-space: nowrap;
+  transition: opacity 0.15s;
+  pointer-events: none;
+}
+.sidebar:hover .logo-text,
+.sidebar:hover .nav-item span:not(.nav-icon),
+.sidebar:hover .user-email,
+.sidebar:hover #btn-logout {
+  opacity: 1;
+  pointer-events: auto;
+}
+/* Keep main content full width always */
+.main-content {
+  margin-left: 56px;
+  transition: margin-left 0.25s cubic-bezier(.4,0,.2,1);
+}
+.sidebar:hover ~ .main-content {
+  margin-left: 240px;
+}
+/* Prevent hover from applying to main content sibling (needs JS) */
