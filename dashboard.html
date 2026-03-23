@@ -139,7 +139,228 @@
         <p>Click a template to start building — hover to preview</p>
         <button class="modal-close" onclick="closeTemplatesModal()">✕</button>
       </div>
-      <div class="tpl-modal-grid" id="tpl-modal-grid"></div>
+      <div class="tpl-modal-grid" id="tpl-modal-grid">
+
+        <!-- Classic ATS -->
+        <div class="tpl-modal-card" onclick="createNewResume('classic')">
+          <div class="tpl-thumb">
+            <div class="tt-name-block"><div class="tt-name-bar"></div><div class="tt-line w50" style="margin-top:4px"></div></div>
+            <div class="tt-rule" style="background:#1a365d;margin:6px 10px 8px"></div>
+            <div class="tt-line w80"></div><div class="tt-line w65"></div><div class="tt-line w75"></div>
+            <div class="tt-section-gap"></div>
+            <div class="tt-rule" style="background:#1a365d;margin:6px 10px 4px"></div>
+            <div class="tt-line w70"></div><div class="tt-line w55"></div><div class="tt-line w80"></div>
+            <div class="tpl-card-overlay">
+              <button class="tpl-overlay-btn primary" onclick="createNewResume('classic');event.stopPropagation()">Use Template</button>
+              <button class="tpl-overlay-btn secondary" onclick="previewTemplate('classic');event.stopPropagation()">&#128065; Preview</button>
+            </div>
+          </div>
+          <div class="tpl-modal-info"><strong>Classic ATS</strong><span>Single-column, max ATS score</span></div>
+        </div>
+
+        <!-- Modern Bold -->
+        <div class="tpl-modal-card" onclick="createNewResume('modern')">
+          <div class="tpl-thumb">
+            <div class="tt-top-stripe" style="background:#2563eb"></div>
+            <div class="tt-name-block" style="padding-top:8px"><div class="tt-name-bar" style="width:62%"></div><div class="tt-line w45" style="margin-top:4px"></div></div>
+            <div class="tt-rule" style="background:#2563eb;margin:6px 10px 8px"></div>
+            <div class="tt-line w80"></div><div class="tt-line w60"></div><div class="tt-line w75"></div>
+            <div class="tt-section-gap"></div>
+            <div class="tt-line w55" style="background:#bfdbfe;height:6px;border-radius:3px;margin:8px 10px 0"></div>
+            <div class="tt-tag-row">
+              <span class="tt-tag" style="border-color:#2563eb;color:#2563eb">Figma</span>
+              <span class="tt-tag" style="border-color:#2563eb;color:#2563eb">Sketch</span>
+              <span class="tt-tag" style="border-color:#2563eb;color:#2563eb">UX</span>
+            </div>
+            <div class="tpl-card-overlay">
+              <button class="tpl-overlay-btn primary" onclick="createNewResume('modern');event.stopPropagation()">Use Template</button>
+              <button class="tpl-overlay-btn secondary" onclick="previewTemplate('modern');event.stopPropagation()">&#128065; Preview</button>
+            </div>
+          </div>
+          <div class="tpl-modal-info"><strong>Modern Bold</strong><span>Bold typography, clean dividers</span></div>
+        </div>
+
+        <!-- Corporate Blue -->
+        <div class="tpl-modal-card" onclick="createNewResume('corporate')">
+          <div class="tpl-thumb" style="padding:0">
+            <div class="tt-header-block" style="background:#1e3a5f">
+              <div class="tt-hb-name"></div>
+              <div class="tt-hb-title"></div>
+            </div>
+            <div style="padding:8px 10px">
+              <div class="tt-line w80"></div><div class="tt-line w65"></div><div class="tt-line w75"></div>
+              <div class="tt-section-gap"></div>
+              <div class="tt-line w70"></div><div class="tt-line w55"></div>
+            </div>
+            <div class="tpl-card-overlay">
+              <button class="tpl-overlay-btn primary" onclick="createNewResume('corporate');event.stopPropagation()">Use Template</button>
+              <button class="tpl-overlay-btn secondary" onclick="previewTemplate('corporate');event.stopPropagation()">&#128065; Preview</button>
+            </div>
+          </div>
+          <div class="tpl-modal-info"><strong>Corporate Blue</strong><span>Navy header, structured sections</span></div>
+        </div>
+
+        <!-- Creative Sidebar -->
+        <div class="tpl-modal-card" onclick="createNewResume('creative')">
+          <div class="tpl-thumb" style="padding:0;flex-direction:row">
+            <div style="width:36%;background:#7c3aed;padding:10px 7px">
+              <div style="width:28px;height:28px;border-radius:50%;background:rgba(255,255,255,0.25);margin:0 auto 8px"></div>
+              <div style="height:5px;background:rgba(255,255,255,0.4);border-radius:2px;margin-bottom:4px"></div>
+              <div style="height:5px;background:rgba(255,255,255,0.25);border-radius:2px;margin-bottom:4px"></div>
+              <div style="height:5px;background:rgba(255,255,255,0.25);border-radius:2px;margin-bottom:4px"></div>
+              <div style="height:5px;background:rgba(255,255,255,0.15);border-radius:2px;margin-bottom:4px"></div>
+              <div style="height:5px;background:rgba(255,255,255,0.15);border-radius:2px"></div>
+            </div>
+            <div style="flex:1;padding:10px 8px">
+              <div class="tt-line w80"></div><div class="tt-line w60"></div><div class="tt-line w75"></div>
+              <div class="tt-section-gap"></div>
+              <div class="tt-line w70"></div><div class="tt-line w55"></div><div class="tt-line w65"></div>
+            </div>
+            <div class="tpl-card-overlay">
+              <button class="tpl-overlay-btn primary" onclick="createNewResume('creative');event.stopPropagation()">Use Template</button>
+              <button class="tpl-overlay-btn secondary" onclick="previewTemplate('creative');event.stopPropagation()">&#128065; Preview</button>
+            </div>
+          </div>
+          <div class="tpl-modal-info"><strong>Creative Sidebar</strong><span>Two-column with coloured sidebar</span></div>
+        </div>
+
+        <!-- Swiss Minimal -->
+        <div class="tpl-modal-card" onclick="createNewResume('swiss')">
+          <div class="tpl-thumb">
+            <div style="display:flex;justify-content:space-between;align-items:flex-start;padding:10px 10px 0">
+              <div><div class="tt-name-bar" style="width:100px;margin:0 0 4px"></div><div style="height:4px;width:60px;background:#d1d5db;border-radius:2px"></div></div>
+              <div style="text-align:right"><div style="height:4px;width:55px;background:#e5e7eb;border-radius:2px;margin-bottom:3px"></div><div style="height:4px;width:45px;background:#e5e7eb;border-radius:2px"></div></div>
+            </div>
+            <div class="tt-rule" style="background:#d97706;margin:7px 10px 8px"></div>
+            <div style="display:flex;gap:8px;padding:0 10px">
+              <div style="width:30%;flex-shrink:0"><div style="height:4px;background:#9ca3af;border-radius:2px;margin-bottom:4px"></div></div>
+              <div style="flex:1"><div class="tt-line w90" style="margin:0 0 4px"></div><div class="tt-line w75" style="margin:0 0 4px"></div><div class="tt-line w80" style="margin:0"></div></div>
+            </div>
+            <div class="tpl-card-overlay">
+              <button class="tpl-overlay-btn primary" onclick="createNewResume('swiss');event.stopPropagation()">Use Template</button>
+              <button class="tpl-overlay-btn secondary" onclick="previewTemplate('swiss');event.stopPropagation()">&#128065; Preview</button>
+            </div>
+          </div>
+          <div class="tpl-modal-info"><strong>Swiss Minimal</strong><span>Google-style horizontal layout</span></div>
+        </div>
+
+        <!-- Executive -->
+        <div class="tpl-modal-card" onclick="createNewResume('executive')">
+          <div class="tpl-thumb">
+            <div style="text-align:center;padding:12px 10px 0">
+              <div class="tt-name-bar" style="width:55%;margin:0 auto 4px"></div>
+              <div style="height:4px;width:40%;background:#d1d5db;border-radius:2px;margin:0 auto"></div>
+            </div>
+            <div style="display:flex;margin:8px 10px 0;gap:0">
+              <div style="flex:1;height:2px;background:#7f1d1d;border-radius:1px"></div>
+            </div>
+            <div style="padding:6px 10px 0">
+              <div class="tt-line w80"></div><div class="tt-line w65"></div><div class="tt-line w75"></div>
+              <div class="tt-section-gap"></div>
+              <div class="tt-line w70"></div><div class="tt-line w55"></div>
+            </div>
+            <div class="tpl-card-overlay">
+              <button class="tpl-overlay-btn primary" onclick="createNewResume('executive');event.stopPropagation()">Use Template</button>
+              <button class="tpl-overlay-btn secondary" onclick="previewTemplate('executive');event.stopPropagation()">&#128065; Preview</button>
+            </div>
+          </div>
+          <div class="tpl-modal-info"><strong>Executive</strong><span>Serif elegance, refined header</span></div>
+        </div>
+
+        <!-- Tech Developer -->
+        <div class="tpl-modal-card" onclick="createNewResume('tech')">
+          <div class="tpl-thumb" style="background:#0d1117;padding:0">
+            <div style="background:#161b22;padding:8px 10px 6px">
+              <div style="display:flex;gap:4px;margin-bottom:6px">
+                <span style="width:7px;height:7px;border-radius:50%;background:#ff5f57;display:inline-block"></span>
+                <span style="width:7px;height:7px;border-radius:50%;background:#ffbd2e;display:inline-block"></span>
+                <span style="width:7px;height:7px;border-radius:50%;background:#28ca40;display:inline-block"></span>
+              </div>
+              <div style="height:6px;width:55%;background:#e6edf3;border-radius:2px;opacity:0.7;margin-bottom:3px"></div>
+              <div style="height:4px;width:40%;background:#00d4aa;border-radius:2px;opacity:0.8"></div>
+            </div>
+            <div style="padding:8px 10px">
+              <div style="height:4px;background:#30363d;border-radius:2px;width:80%;margin-bottom:5px"></div>
+              <div style="height:4px;background:#30363d;border-radius:2px;width:65%;margin-bottom:5px"></div>
+              <div style="height:4px;background:#30363d;border-radius:2px;width:75%;margin-bottom:5px"></div>
+              <div style="height:4px;background:#30363d;border-radius:2px;width:55%"></div>
+            </div>
+            <div class="tpl-card-overlay">
+              <button class="tpl-overlay-btn primary" onclick="createNewResume('tech');event.stopPropagation()">Use Template</button>
+              <button class="tpl-overlay-btn secondary" onclick="previewTemplate('tech');event.stopPropagation()">&#128065; Preview</button>
+            </div>
+          </div>
+          <div class="tpl-modal-info"><strong>Tech Developer</strong><span>Terminal dark theme</span></div>
+        </div>
+
+        <!-- Timeline -->
+        <div class="tpl-modal-card" onclick="createNewResume('timeline')">
+          <div class="tpl-thumb">
+            <div style="padding:10px 10px 0"><div class="tt-name-bar" style="width:58%"></div></div>
+            <div class="tt-rule" style="background:#0891b2;margin:7px 10px 8px"></div>
+            <div style="padding:0 10px">
+              <div style="display:flex;align-items:center;gap:6px;margin-bottom:3px"><span style="width:7px;height:7px;border-radius:50%;background:#0891b2;flex-shrink:0;display:inline-block"></span><div style="height:4px;background:#d1d5db;border-radius:2px;width:65%"></div></div>
+              <div style="width:2px;height:8px;background:#0891b2;opacity:0.4;margin-left:3px"></div>
+              <div style="display:flex;align-items:center;gap:6px;margin-bottom:3px"><span style="width:7px;height:7px;border-radius:50%;background:#0891b2;flex-shrink:0;display:inline-block"></span><div style="height:4px;background:#d1d5db;border-radius:2px;width:55%"></div></div>
+              <div style="width:2px;height:8px;background:#0891b2;opacity:0.4;margin-left:3px"></div>
+              <div style="display:flex;align-items:center;gap:6px"><span style="width:7px;height:7px;border-radius:50%;background:#0891b2;flex-shrink:0;display:inline-block"></span><div style="height:4px;background:#d1d5db;border-radius:2px;width:70%"></div></div>
+            </div>
+            <div class="tpl-card-overlay">
+              <button class="tpl-overlay-btn primary" onclick="createNewResume('timeline');event.stopPropagation()">Use Template</button>
+              <button class="tpl-overlay-btn secondary" onclick="previewTemplate('timeline');event.stopPropagation()">&#128065; Preview</button>
+            </div>
+          </div>
+          <div class="tpl-modal-info"><strong>Timeline</strong><span>Vertical dot-line structure</span></div>
+        </div>
+
+        <!-- Two-Column Pro -->
+        <div class="tpl-modal-card" onclick="createNewResume('twoColumn')">
+          <div class="tpl-thumb" style="padding:0">
+            <div style="background:#0f4c75;height:24px;padding:4px 10px"><div style="height:7px;width:50%;background:rgba(255,255,255,0.6);border-radius:2px"></div></div>
+            <div style="display:flex;flex:1">
+              <div style="width:34%;background:#f0f4f8;padding:8px 6px">
+                <div style="height:4px;background:#cbd5e1;border-radius:2px;margin-bottom:4px;width:80%"></div>
+                <div style="height:4px;background:#cbd5e1;border-radius:2px;margin-bottom:4px;width:65%"></div>
+                <div style="height:4px;background:#cbd5e1;border-radius:2px;margin-bottom:8px;width:70%"></div>
+                <div style="height:4px;background:#cbd5e1;border-radius:2px;margin-bottom:4px;width:75%"></div>
+                <div style="height:4px;background:#cbd5e1;border-radius:2px;width:55%"></div>
+              </div>
+              <div style="flex:1;padding:8px 8px">
+                <div class="tt-line w90"></div><div class="tt-line w75"></div><div class="tt-line w80"></div>
+                <div class="tt-section-gap"></div>
+                <div class="tt-line w70"></div><div class="tt-line w60"></div>
+              </div>
+            </div>
+            <div class="tpl-card-overlay">
+              <button class="tpl-overlay-btn primary" onclick="createNewResume('twoColumn');event.stopPropagation()">Use Template</button>
+              <button class="tpl-overlay-btn secondary" onclick="previewTemplate('twoColumn');event.stopPropagation()">&#128065; Preview</button>
+            </div>
+          </div>
+          <div class="tpl-modal-info"><strong>Two-Column Pro</strong><span>Skills sidebar, bold headers</span></div>
+        </div>
+
+        <!-- Compact One-Page -->
+        <div class="tpl-modal-card" onclick="createNewResume('compact')">
+          <div class="tpl-thumb">
+            <div style="display:flex;justify-content:space-between;align-items:center;padding:8px 10px 4px;border-bottom:2px solid #065f46">
+              <div class="tt-name-bar" style="width:45%;margin:0"></div>
+              <div style="text-align:right"><div style="height:4px;width:50px;background:#e5e7eb;border-radius:2px"></div></div>
+            </div>
+            <div style="padding:6px 10px 0">
+              <div style="display:flex;gap:6px;margin-bottom:5px;align-items:center"><span style="font-size:6px;font-weight:800;color:#065f46;width:22px;flex-shrink:0;text-transform:uppercase">EXP</span><div class="tt-line w80" style="margin:0"></div></div>
+              <div style="display:flex;gap:6px;margin-bottom:5px;align-items:center"><span style="font-size:6px;font-weight:800;color:#065f46;width:22px;flex-shrink:0;text-transform:uppercase">SKL</span><div class="tt-line w70" style="margin:0"></div></div>
+              <div style="display:flex;gap:6px;margin-bottom:5px;align-items:center"><span style="font-size:6px;font-weight:800;color:#065f46;width:22px;flex-shrink:0;text-transform:uppercase">EDU</span><div class="tt-line w65" style="margin:0"></div></div>
+              <div style="display:flex;gap:6px;align-items:center"><span style="font-size:6px;font-weight:800;color:#065f46;width:22px;flex-shrink:0;text-transform:uppercase">PRJ</span><div class="tt-line w75" style="margin:0"></div></div>
+            </div>
+            <div class="tpl-card-overlay">
+              <button class="tpl-overlay-btn primary" onclick="createNewResume('compact');event.stopPropagation()">Use Template</button>
+              <button class="tpl-overlay-btn secondary" onclick="previewTemplate('compact');event.stopPropagation()">&#128065; Preview</button>
+            </div>
+          </div>
+          <div class="tpl-modal-info"><strong>Compact One-Page</strong><span>Dense — maximizes every inch</span></div>
+        </div>
+
+      </div>
     </div>
   </div>
 
@@ -286,166 +507,60 @@
   </script>
 
   <script>
-  // ─── SAMPLE RESUME DATA (used only for full-size Preview modal) ──────────
+  // ─── SAMPLE RESUME (for Preview modal only) ───────────────────────────────
   var SAMPLE_RESUME = {
-    personal: { fullName: 'Alex Morgan', title: 'Senior Product Designer', email: 'alex@email.com', phone: '+1 (415) 555-0192', location: 'San Francisco, CA', linkedin: 'linkedin.com/in/alexmorgan', portfolio: 'alexmorgan.design', summary: 'Creative product designer with 8+ years building user-centered digital experiences for Fortune 500 companies. Led design systems adopted by 200+ engineers across 12 product teams.' },
+    personal: { fullName: 'Alex Morgan', title: 'Senior Product Designer', email: 'alex@email.com', phone: '+1 (415) 555-0192', location: 'San Francisco, CA', linkedin: 'linkedin.com/in/alexmorgan', portfolio: 'alexmorgan.design', summary: 'Creative product designer with 8+ years building user-centered digital experiences. Led design systems adopted by 200+ engineers across 12 product teams.' },
     experience: [
-      { company: 'Stripe', position: 'Senior Product Designer', startDate: 'Mar 2021', endDate: '', current: true, bullets: ['Led redesign of checkout flow, improving conversion by 34%', 'Built design system used across 12 product teams', 'Mentored 4 junior designers through weekly 1:1 coaching sessions'] },
-      { company: 'Airbnb', position: 'Product Designer', startDate: 'Jun 2018', endDate: 'Feb 2021', current: false, bullets: ['Designed host onboarding experience, reducing drop-off by 28%', 'Collaborated with 6 engineers to ship mobile app redesign on schedule'] }
+      { company: 'Stripe', position: 'Senior Product Designer', startDate: 'Mar 2021', endDate: '', current: true, bullets: ['Led redesign of checkout flow, improving conversion by 34%', 'Built design system used across 12 product teams', 'Mentored 4 junior designers through weekly coaching sessions'] },
+      { company: 'Airbnb', position: 'Product Designer', startDate: 'Jun 2018', endDate: 'Feb 2021', current: false, bullets: ['Designed host onboarding, reducing drop-off by 28%', 'Shipped mobile app redesign with 6-engineer team'] }
     ],
     education: [{ school: 'Carnegie Mellon University', degree: "Bachelor's", field: 'Human-Computer Interaction', startDate: 'Sep 2013', endDate: 'May 2017', honors: 'Cum Laude, 3.9 GPA' }],
-    skills: { technical: ['Figma', 'Sketch', 'Prototyping', 'User Research', 'Wireframing'], tools: ['Jira', 'Notion', 'Zeplin', 'HTML/CSS', 'Lottie'], soft: ['Leadership', 'Communication', 'Stakeholder Management'], languages: ['English (Native)', 'French (Conversational)'] },
-    projects: [{ name: 'DesignOS', description: 'Open-source design token system used by 500+ designers globally.', technologies: 'Figma Tokens, Storybook, CSS Variables', link: 'github.com/alexmorgan/designos' }],
-    certifications: [{ name: 'Google UX Design Certificate', issuer: 'Google', year: '2022' }, { name: 'Certified ScrumMaster (CSM)', issuer: 'Scrum Alliance', year: '2021' }]
+    skills: { technical: ['Figma', 'Sketch', 'Prototyping', 'User Research', 'Wireframing'], tools: ['Jira', 'Notion', 'Zeplin', 'HTML/CSS'], soft: ['Leadership', 'Communication', 'Stakeholder Mgmt'], languages: ['English (Native)', 'French (Conversational)'] },
+    projects: [{ name: 'DesignOS', description: 'Open-source design token system used by 500+ designers.', technologies: 'Figma Tokens, Storybook, CSS Variables', link: 'github.com/alexmorgan/designos' }],
+    certifications: [{ name: 'Google UX Design Certificate', issuer: 'Google', year: '2022' }, { name: 'Certified ScrumMaster', issuer: 'Scrum Alliance', year: '2021' }]
   };
 
-  // ─── TEMPLATE DEFINITIONS ─────────────────────────────────────────────────
-  // thumb config: header bg color, optional sidebar color, line accent
-  var TEMPLATES_CONFIG = [
-    { key: 'classic',   name: 'Classic ATS',      desc: 'Single-column, max ATS score',         headerBg: '#1a365d',  style: 'single' },
-    { key: 'modern',    name: 'Modern Bold',       desc: 'Bold typography, clean dividers',       headerBg: '#2563eb',  style: 'top-stripe' },
-    { key: 'corporate', name: 'Corporate Blue',    desc: 'Navy header, structured sections',      headerBg: '#1e3a5f',  style: 'header-block' },
-    { key: 'creative',  name: 'Creative Sidebar',  desc: 'Two-column with coloured sidebar',      headerBg: '#7c3aed',  style: 'sidebar' },
-    { key: 'swiss',     name: 'Swiss Minimal',     desc: 'Google-style horizontal layout',        headerBg: '#d97706',  style: 'ruled' },
-    { key: 'executive', name: 'Executive',         desc: 'Serif elegance, refined header',        headerBg: '#7f1d1d',  style: 'rule-center' },
-    { key: 'tech',      name: 'Tech Developer',    desc: 'Terminal dark theme',                   headerBg: '#0d1117',  style: 'dark' },
-    { key: 'timeline',  name: 'Timeline',          desc: 'Vertical dot-line structure',           headerBg: '#0891b2',  style: 'timeline' },
-    { key: 'twoColumn', name: 'Two-Column Pro',    desc: 'Skills sidebar, bold headers',          headerBg: '#0f4c75',  style: 'two-col' },
-    { key: 'compact',   name: 'Compact One-Page',  desc: 'Dense — maximizes every inch',          headerBg: '#065f46',  style: 'compact' }
-  ];
-
-  // ─── BUILD STATIC THUMBNAIL GRID ─────────────────────────────────────────
-  function buildTemplateModal() {
-    var grid = document.getElementById('tpl-modal-grid');
-    if (!grid) return;
-    if (grid.children.length > 0) return; // already built
-
-    grid.innerHTML = '';
-    TEMPLATES_CONFIG.forEach(function(tpl) {
-      var card = document.createElement('div');
-      card.className = 'tpl-modal-card';
-
-      card.innerHTML =
-        '<div class="tpl-thumb tpl-thumb-' + tpl.key + '" data-style="' + tpl.style + '">' +
-          _buildThumbHtml(tpl) +
-          // Hover overlay
-          '<div class="tpl-card-overlay">' +
-            '<button class="tpl-overlay-btn primary" onclick="createNewResume('' + tpl.key + '');event.stopPropagation();">' +
-              '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width:13px;height:13px"><polyline points="20 6 9 17 4 12"/></svg> Use Template' +
-            '</button>' +
-            '<button class="tpl-overlay-btn secondary" onclick="previewTemplate('' + tpl.key + '');event.stopPropagation();">' +
-              '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:13px;height:13px"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg> Preview' +
-            '</button>' +
-          '</div>' +
-        '</div>' +
-        '<div class="tpl-modal-info"><strong>' + tpl.name + '</strong><span>' + tpl.desc + '</span></div>';
-
-      grid.appendChild(card);
-    });
-  }
-
-  function _buildThumbHtml(tpl) {
-    var h = tpl.headerBg;
-    var s = tpl.style;
-
-    if (s === 'sidebar') {
-      return '<div class="tt-sidebar-col" style="background:' + h + '"></div>' +
-             '<div class="tt-sidebar-main"><div class="tt-line w70"></div><div class="tt-line w55"></div><div class="tt-line w80"></div><div class="tt-line w60"></div></div>';
-    }
-    if (s === 'two-col') {
-      return '<div class="tt-header" style="background:' + h + ';height:26px"></div>' +
-             '<div class="tt-two-col-body">' +
-               '<div class="tt-left-sm" style="background:#f0f4f8"></div>' +
-               '<div class="tt-right-sm"><div class="tt-line w80"></div><div class="tt-line w60"></div><div class="tt-line w70"></div></div>' +
-             '</div>';
-    }
-    if (s === 'dark') {
-      return '<div class="tt-dark-header"><div class="tt-dots"><span></span><span></span><span></span></div>' +
-             '<div class="tt-line tt-line-dim w70"></div><div class="tt-line tt-line-dim w50"></div></div>' +
-             '<div class="tt-lines-dark"><div class="tt-line tt-line-dim w80"></div><div class="tt-line tt-line-dim w60"></div><div class="tt-line tt-line-dim w75"></div></div>';
-    }
-    if (s === 'top-stripe') {
-      return '<div class="tt-top-stripe" style="background:' + h + '"></div>' +
-             '<div class="tt-name-block"><div class="tt-name-bar"></div><div class="tt-line w55" style="margin-top:3px"></div></div>' +
-             '<div class="tt-rule" style="background:' + h + '"></div>' +
-             '<div class="tt-line w80"></div><div class="tt-line w65"></div><div class="tt-line w75"></div>';
-    }
-    if (s === 'ruled') {
-      return '<div class="tt-ruled-top"><div class="tt-name-bar w55"></div><div class="tt-line w40"></div></div>' +
-             '<div class="tt-rule" style="background:' + h + ';height:3px"></div>' +
-             '<div class="tt-line w80" style="margin-top:6px"></div><div class="tt-line w65"></div><div class="tt-line w70"></div>';
-    }
-    if (s === 'rule-center') {
-      return '<div style="text-align:center;padding:8px 10px 4px"><div class="tt-name-bar" style="margin:0 auto;width:55%"></div>' +
-             '<div class="tt-line w40" style="margin:3px auto"></div></div>' +
-             '<div class="tt-rule" style="background:' + h + '"></div>' +
-             '<div style="padding:0 10px"><div class="tt-line w80"></div><div class="tt-line w65"></div><div class="tt-line w70"></div></div>';
-    }
-    if (s === 'timeline') {
-      return '<div style="padding:8px 8px 4px"><div class="tt-name-bar w60"></div></div>' +
-             '<div class="tt-rule" style="background:' + h + '"></div>' +
-             '<div class="tt-tl-rows">' +
-               '<div class="tt-tl-row"><div class="tt-dot" style="background:' + h + '"></div><div class="tt-line w65"></div></div>' +
-               '<div class="tt-tl-vline" style="background:' + h + '"></div>' +
-               '<div class="tt-tl-row"><div class="tt-dot" style="background:' + h + '"></div><div class="tt-line w55"></div></div>' +
-               '<div class="tt-tl-vline" style="background:' + h + '"></div>' +
-               '<div class="tt-tl-row"><div class="tt-dot" style="background:' + h + '"></div><div class="tt-line w70"></div></div>' +
-             '</div>';
-    }
-    if (s === 'compact') {
-      return '<div class="tt-compact-top" style="border-bottom:2px solid ' + h + '">' +
-               '<div class="tt-name-bar w55"></div>' +
-             '</div>' +
-             '<div class="tt-compact-rows">' +
-               '<div class="tt-compact-row"><span class="tt-compact-label" style="color:' + h + '">EXP</span><div class="tt-line w70"></div></div>' +
-               '<div class="tt-compact-row"><span class="tt-compact-label" style="color:' + h + '">SKL</span><div class="tt-line w65"></div></div>' +
-               '<div class="tt-compact-row"><span class="tt-compact-label" style="color:' + h + '">EDU</span><div class="tt-line w60"></div></div>' +
-             '</div>';
-    }
-    // default: single-column / header-block
-    return '<div class="tt-header" style="background:' + h + '"></div>' +
-           '<div class="tt-line w80"></div>' +
-           '<div class="tt-line w65"></div>' +
-           '<div class="tt-line w90"></div>' +
-           '<div class="tt-line w55"></div>' +
-           '<div class="tt-line w75"></div>';
-  }
-
-  // ─── PREVIEW MODAL ───────────────────────────────────────────────────────
-  var _pendingTemplateKey = null;
+  var TEMPLATE_NAMES = {
+    classic: 'Classic ATS', modern: 'Modern Bold', corporate: 'Corporate Blue',
+    creative: 'Creative Sidebar', swiss: 'Swiss Minimal', executive: 'Executive',
+    tech: 'Tech Developer', timeline: 'Timeline', twoColumn: 'Two-Column Pro', compact: 'Compact One-Page'
+  };
+  var TEMPLATE_DESCS = {
+    classic: 'Single-column, max ATS score', modern: 'Bold typography, clean dividers',
+    corporate: 'Navy header, structured sections', creative: 'Two-column with coloured sidebar',
+    swiss: 'Google-style horizontal layout', executive: 'Serif elegance, refined header',
+    tech: 'Terminal dark theme', timeline: 'Vertical dot-line structure',
+    twoColumn: 'Skills sidebar, bold headers', compact: 'Dense — maximizes every inch'
+  };
 
   function previewTemplate(key) {
-    var tpl = TEMPLATES_CONFIG.find(function(t){ return t.key === key; });
-    if (!tpl) return;
-    _pendingTemplateKey = key;
+    var name = TEMPLATE_NAMES[key] || key;
+    var desc = TEMPLATE_DESCS[key] || '';
 
-    document.getElementById('preview-modal-title').textContent = tpl.name;
-    document.getElementById('preview-modal-desc').textContent = tpl.desc;
+    document.getElementById('preview-modal-title').textContent = name;
+    document.getElementById('preview-modal-desc').textContent = desc + ' · Sample resume with placeholder data';
 
     var resumeEl = document.getElementById('preview-modal-resume');
     if (typeof renderResume === 'function') {
       resumeEl.innerHTML = renderResume(SAMPLE_RESUME, key, {});
     } else {
-      resumeEl.innerHTML = '<div style="padding:40px;text-align:center;color:#6b7280">Preview not available</div>';
+      resumeEl.innerHTML = '<div style="padding:40px;text-align:center;color:#6b7280;font-family:sans-serif">Preview unavailable — please try again</div>';
     }
 
     document.getElementById('preview-modal').classList.add('open');
 
-    // Scale to fit modal width
     setTimeout(function() {
-      var body  = document.querySelector('.preview-modal-body');
-      var el    = document.getElementById('preview-modal-resume');
+      var body = document.querySelector('.preview-modal-body');
+      var el   = document.getElementById('preview-modal-resume');
       if (!body || !el) return;
-      var avail = body.clientWidth - 48;
-      var scale = Math.min(1, avail / 794);
+      var scale = Math.min(1, (body.clientWidth - 48) / 794);
       el.style.transform = 'scale(' + scale + ')';
       el.style.transformOrigin = 'top center';
-      // collapse the extra whitespace below
-      el.style.marginBottom = ((297 * 3.7795 * scale) - (297 * 3.7795)) + 'px';
-    }, 60);
+      el.style.marginBottom = Math.round((1123 * scale) - 1123) + 'px';
+    }, 50);
 
     document.getElementById('btn-use-template').onclick = function() {
-      createNewResume(_pendingTemplateKey);
+      createNewResume(key);
     };
   }
 
@@ -453,15 +568,13 @@
     document.getElementById('preview-modal').classList.remove('open');
   }
 
-  // Override openTemplatesModal to also build the grid
-  var _origOpen = window.openTemplatesModal;
+  // Restore original openTemplatesModal (no override needed — grid is hardcoded)
   window.openTemplatesModal = function() {
     document.getElementById('templates-modal').classList.add('open');
-    buildTemplateModal();
   };
 
   document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape') { closePreviewModal(); }
+    if (e.key === 'Escape') { closePreviewModal(); closeTemplatesModal(); closeATSModal(); }
   });
   </script>
 </body>
