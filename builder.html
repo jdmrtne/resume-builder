@@ -236,7 +236,186 @@
           <!-- Templates Panel -->
           <div class="panel-view active" id="panel-templates">
             <p style="font-size:0.8rem;color:var(--text-2);margin-bottom:12px;">Choose a template for your resume</p>
-            <div class="template-grid" id="template-grid"></div>
+            <div class="builder-tpl-grid" id="template-grid">
+
+              <!-- Classic ATS -->
+              <div class="btpl-card active" data-template="classic" onclick="selectTemplate('classic',this)">
+                <div class="btpl-thumb">
+                  <div class="btt-name-block"><div class="btt-bar" style="width:55%"></div><div class="btt-line" style="width:40%;margin-top:3px"></div></div>
+                  <div class="btt-rule" style="background:#1a365d;margin:5px 8px 6px"></div>
+                  <div class="btt-line w80"></div><div class="btt-line w65"></div><div class="btt-line w75"></div>
+                  <div style="height:5px"></div>
+                  <div class="btt-rule" style="background:#1a365d;margin:0 8px 5px"></div>
+                  <div class="btt-line w70"></div><div class="btt-line w55"></div>
+                  <div class="btpl-overlay"><button class="btpl-use-btn">Use</button></div>
+                </div>
+                <span class="btpl-name">Classic ATS</span>
+              </div>
+
+              <!-- Modern Bold -->
+              <div class="btpl-card" data-template="modern" onclick="selectTemplate('modern',this)">
+                <div class="btpl-thumb">
+                  <div style="height:3px;background:#2563eb;flex-shrink:0"></div>
+                  <div class="btt-name-block" style="padding-top:6px"><div class="btt-bar" style="width:60%"></div><div class="btt-line" style="width:40%;margin-top:3px"></div></div>
+                  <div class="btt-rule" style="background:#2563eb;margin:5px 8px 6px"></div>
+                  <div class="btt-line w80"></div><div class="btt-line w60"></div><div class="btt-line w70"></div>
+                  <div style="height:5px"></div>
+                  <div style="display:flex;gap:3px;margin:0 8px"><span style="font-size:5px;padding:1px 4px;border:1px solid #2563eb;border-radius:6px;color:#2563eb">Figma</span><span style="font-size:5px;padding:1px 4px;border:1px solid #2563eb;border-radius:6px;color:#2563eb">UX</span></div>
+                  <div class="btpl-overlay"><button class="btpl-use-btn">Use</button></div>
+                </div>
+                <span class="btpl-name">Modern Bold</span>
+              </div>
+
+              <!-- Corporate Blue -->
+              <div class="btpl-card" data-template="corporate" onclick="selectTemplate('corporate',this)">
+                <div class="btpl-thumb" style="padding:0">
+                  <div style="background:#1e3a5f;padding:7px 8px;flex-shrink:0">
+                    <div style="height:6px;width:55%;background:rgba(255,255,255,0.7);border-radius:2px;margin-bottom:3px"></div>
+                    <div style="height:4px;width:38%;background:rgba(255,255,255,0.4);border-radius:2px"></div>
+                  </div>
+                  <div style="padding:6px 8px">
+                    <div class="btt-line w80"></div><div class="btt-line w65"></div><div class="btt-line w75"></div>
+                    <div style="height:5px"></div>
+                    <div class="btt-line w70"></div><div class="btt-line w55"></div>
+                  </div>
+                  <div class="btpl-overlay"><button class="btpl-use-btn">Use</button></div>
+                </div>
+                <span class="btpl-name">Corporate Blue</span>
+              </div>
+
+              <!-- Creative Sidebar -->
+              <div class="btpl-card" data-template="creative" onclick="selectTemplate('creative',this)">
+                <div class="btpl-thumb" style="padding:0;flex-direction:row">
+                  <div style="width:34%;background:#7c3aed;padding:8px 5px;flex-shrink:0">
+                    <div style="width:20px;height:20px;border-radius:50%;background:rgba(255,255,255,0.25);margin:0 auto 5px"></div>
+                    <div style="height:3px;background:rgba(255,255,255,0.4);border-radius:2px;margin-bottom:3px"></div>
+                    <div style="height:3px;background:rgba(255,255,255,0.25);border-radius:2px;margin-bottom:3px"></div>
+                    <div style="height:3px;background:rgba(255,255,255,0.15);border-radius:2px"></div>
+                  </div>
+                  <div style="flex:1;padding:7px 6px">
+                    <div class="btt-line w80"></div><div class="btt-line w60"></div><div class="btt-line w75"></div>
+                    <div style="height:5px"></div>
+                    <div class="btt-line w70"></div><div class="btt-line w55"></div>
+                  </div>
+                  <div class="btpl-overlay"><button class="btpl-use-btn">Use</button></div>
+                </div>
+                <span class="btpl-name">Creative Sidebar</span>
+              </div>
+
+              <!-- Swiss Minimal -->
+              <div class="btpl-card" data-template="swiss" onclick="selectTemplate('swiss',this)">
+                <div class="btpl-thumb">
+                  <div style="display:flex;justify-content:space-between;padding:7px 8px 0">
+                    <div><div class="btt-bar" style="width:70px;margin:0 0 3px"></div><div style="height:3px;width:45px;background:#d1d5db;border-radius:2px"></div></div>
+                    <div><div style="height:3px;width:40px;background:#e5e7eb;border-radius:2px;margin-bottom:2px"></div><div style="height:3px;width:32px;background:#e5e7eb;border-radius:2px"></div></div>
+                  </div>
+                  <div class="btt-rule" style="background:#d97706;margin:5px 8px 6px"></div>
+                  <div style="display:flex;gap:5px;padding:0 8px">
+                    <div style="width:28%;flex-shrink:0"><div style="height:3px;background:#9ca3af;border-radius:2px"></div></div>
+                    <div style="flex:1"><div class="btt-line w90" style="margin:0 0 3px"></div><div class="btt-line w75" style="margin:0 0 3px"></div><div class="btt-line w80" style="margin:0"></div></div>
+                  </div>
+                  <div class="btpl-overlay"><button class="btpl-use-btn">Use</button></div>
+                </div>
+                <span class="btpl-name">Swiss Minimal</span>
+              </div>
+
+              <!-- Executive -->
+              <div class="btpl-card" data-template="executive" onclick="selectTemplate('executive',this)">
+                <div class="btpl-thumb">
+                  <div style="text-align:center;padding:9px 8px 0">
+                    <div class="btt-bar" style="width:50%;margin:0 auto 3px"></div>
+                    <div style="height:3px;width:35%;background:#d1d5db;border-radius:2px;margin:0 auto"></div>
+                  </div>
+                  <div style="margin:6px 8px 0;height:2px;background:#7f1d1d;border-radius:1px"></div>
+                  <div style="padding:5px 8px 0">
+                    <div class="btt-line w80"></div><div class="btt-line w65"></div><div class="btt-line w75"></div>
+                    <div style="height:5px"></div>
+                    <div class="btt-line w70"></div><div class="btt-line w55"></div>
+                  </div>
+                  <div class="btpl-overlay"><button class="btpl-use-btn">Use</button></div>
+                </div>
+                <span class="btpl-name">Executive</span>
+              </div>
+
+              <!-- Tech Developer -->
+              <div class="btpl-card" data-template="tech" onclick="selectTemplate('tech',this)">
+                <div class="btpl-thumb" style="background:#0d1117;padding:0">
+                  <div style="background:#161b22;padding:6px 8px;flex-shrink:0">
+                    <div style="display:flex;gap:3px;margin-bottom:5px">
+                      <span style="width:6px;height:6px;border-radius:50%;background:#ff5f57;display:inline-block"></span>
+                      <span style="width:6px;height:6px;border-radius:50%;background:#ffbd2e;display:inline-block"></span>
+                      <span style="width:6px;height:6px;border-radius:50%;background:#28ca40;display:inline-block"></span>
+                    </div>
+                    <div style="height:5px;width:55%;background:#e6edf3;border-radius:2px;opacity:0.7;margin-bottom:3px"></div>
+                    <div style="height:3px;width:40%;background:#00d4aa;border-radius:2px"></div>
+                  </div>
+                  <div style="padding:6px 8px">
+                    <div style="height:3px;background:#30363d;border-radius:2px;width:80%;margin-bottom:4px"></div>
+                    <div style="height:3px;background:#30363d;border-radius:2px;width:65%;margin-bottom:4px"></div>
+                    <div style="height:3px;background:#30363d;border-radius:2px;width:75%;margin-bottom:4px"></div>
+                    <div style="height:3px;background:#30363d;border-radius:2px;width:55%"></div>
+                  </div>
+                  <div class="btpl-overlay"><button class="btpl-use-btn">Use</button></div>
+                </div>
+                <span class="btpl-name">Tech Developer</span>
+              </div>
+
+              <!-- Timeline -->
+              <div class="btpl-card" data-template="timeline" onclick="selectTemplate('timeline',this)">
+                <div class="btpl-thumb">
+                  <div style="padding:7px 8px 0"><div class="btt-bar" style="width:55%"></div></div>
+                  <div class="btt-rule" style="background:#0891b2;margin:5px 8px 6px"></div>
+                  <div style="padding:0 8px">
+                    <div style="display:flex;align-items:center;gap:5px;margin-bottom:2px"><span style="width:6px;height:6px;border-radius:50%;background:#0891b2;flex-shrink:0;display:inline-block"></span><div style="height:3px;background:#d1d5db;border-radius:2px;flex:1"></div></div>
+                    <div style="width:2px;height:6px;background:#0891b2;opacity:0.4;margin-left:2px"></div>
+                    <div style="display:flex;align-items:center;gap:5px;margin-bottom:2px"><span style="width:6px;height:6px;border-radius:50%;background:#0891b2;flex-shrink:0;display:inline-block"></span><div style="height:3px;background:#d1d5db;border-radius:2px;flex:1"></div></div>
+                    <div style="width:2px;height:6px;background:#0891b2;opacity:0.4;margin-left:2px"></div>
+                    <div style="display:flex;align-items:center;gap:5px"><span style="width:6px;height:6px;border-radius:50%;background:#0891b2;flex-shrink:0;display:inline-block"></span><div style="height:3px;background:#d1d5db;border-radius:2px;flex:1"></div></div>
+                  </div>
+                  <div class="btpl-overlay"><button class="btpl-use-btn">Use</button></div>
+                </div>
+                <span class="btpl-name">Timeline</span>
+              </div>
+
+              <!-- Two-Column Pro -->
+              <div class="btpl-card" data-template="twoColumn" onclick="selectTemplate('twoColumn',this)">
+                <div class="btpl-thumb" style="padding:0">
+                  <div style="background:#0f4c75;height:20px;padding:3px 8px;flex-shrink:0"><div style="height:5px;width:50%;background:rgba(255,255,255,0.6);border-radius:2px"></div></div>
+                  <div style="display:flex;flex:1">
+                    <div style="width:32%;background:#f0f4f8;padding:6px 5px">
+                      <div style="height:3px;background:#cbd5e1;border-radius:2px;margin-bottom:3px;width:80%"></div>
+                      <div style="height:3px;background:#cbd5e1;border-radius:2px;margin-bottom:3px;width:65%"></div>
+                      <div style="height:3px;background:#cbd5e1;border-radius:2px;width:70%"></div>
+                    </div>
+                    <div style="flex:1;padding:6px 6px">
+                      <div class="btt-line w90"></div><div class="btt-line w75"></div><div class="btt-line w80"></div>
+                      <div style="height:4px"></div>
+                      <div class="btt-line w65"></div><div class="btt-line w55"></div>
+                    </div>
+                  </div>
+                  <div class="btpl-overlay"><button class="btpl-use-btn">Use</button></div>
+                </div>
+                <span class="btpl-name">Two-Column Pro</span>
+              </div>
+
+              <!-- Compact One-Page -->
+              <div class="btpl-card" data-template="compact" onclick="selectTemplate('compact',this)">
+                <div class="btpl-thumb">
+                  <div style="display:flex;justify-content:space-between;align-items:center;padding:6px 8px 4px;border-bottom:2px solid #065f46">
+                    <div class="btt-bar" style="width:42%;margin:0"></div>
+                    <div style="height:3px;width:38px;background:#e5e7eb;border-radius:2px"></div>
+                  </div>
+                  <div style="padding:5px 8px 0">
+                    <div style="display:flex;gap:5px;margin-bottom:4px;align-items:center"><span style="font-size:5px;font-weight:800;color:#065f46;width:18px;flex-shrink:0;text-transform:uppercase">EXP</span><div class="btt-line w80" style="margin:0"></div></div>
+                    <div style="display:flex;gap:5px;margin-bottom:4px;align-items:center"><span style="font-size:5px;font-weight:800;color:#065f46;width:18px;flex-shrink:0;text-transform:uppercase">SKL</span><div class="btt-line w70" style="margin:0"></div></div>
+                    <div style="display:flex;gap:5px;align-items:center"><span style="font-size:5px;font-weight:800;color:#065f46;width:18px;flex-shrink:0;text-transform:uppercase">EDU</span><div class="btt-line w65" style="margin:0"></div></div>
+                  </div>
+                  <div class="btpl-overlay"><button class="btpl-use-btn">Use</button></div>
+                </div>
+                <span class="btpl-name">Compact One-Page</span>
+              </div>
+
+            </div>
           </div>
 
           <!-- Customize Panel -->

@@ -34,8 +34,8 @@
 
 /* Builder Body */
 .builder-body {
-  display: grid; grid-template-columns: 340px 1fr 400px;
-  margin-top: 56px; height: calc(100vh - 56px); margin-left: 240px;
+  display: grid; grid-template-columns: 340px 1fr;
+  margin-top: 56px; height: calc(100vh - 56px); margin-left: 240px; margin-right: 400px;
 }
 
 /* ─── LEFT PANEL (FORM) ────────────────────────────────────────────────────── */
@@ -151,6 +151,7 @@
   flex: 1; overflow-y: auto; overflow-x: hidden;
   display: flex; flex-direction: column; align-items: center;
   padding: 24px 24px 16px;
+  min-width: 0;
 }
 .preview-scale-container {
   --preview-scale: 0.7;
@@ -189,8 +190,17 @@
 
 /* ─── RIGHT PANEL (TOOLS) ─────────────────────────────────────────────────── */
 .builder-right {
-  background: #fff; border-left: 1px solid var(--border);
-  display: flex; flex-direction: column; overflow: hidden;
+  position: fixed;
+  top: 56px;
+  right: 0;
+  width: 400px;
+  height: calc(100vh - 56px);
+  background: #fff;
+  border-left: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  z-index: 40;
 }
 
 .panel-tabs { display: flex; border-bottom: 1px solid var(--border); }
@@ -345,6 +355,7 @@
 }
 .builder-body {
   margin-left: 56px;
+  margin-right: 400px;
   transition: margin-left 0.25s cubic-bezier(.4,0,.2,1);
 }
 .sidebar:hover ~ .builder-topbar ~ .builder-body,
@@ -506,3 +517,67 @@ body.sidebar-expanded .builder-body {
 
 /* Remove old template-thumb styles (replaced) */
 .tpl-mini-frame-sm, .tpl-mini-scaler-sm { display: none !important; }
+
+/* ─── BUILDER SIDEBAR TEMPLATE CARDS ─────────────────────────────────────── */
+.builder-tpl-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  padding-bottom: 4px;
+}
+.btpl-card {
+  border: 2px solid var(--border);
+  border-radius: 9px;
+  overflow: hidden;
+  cursor: pointer;
+  background: #fff;
+  position: relative;
+  transition: border-color 0.18s, box-shadow 0.18s;
+}
+.btpl-card:hover  { border-color: var(--primary); }
+.btpl-card.active { border-color: var(--primary); box-shadow: 0 0 0 2px rgba(79,70,229,.22); }
+
+.btpl-thumb {
+  height: 120px;
+  background: #f8fafc;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* shared primitives — builder (smaller scale) */
+.btt-name-block { padding: 7px 8px 0; }
+.btt-bar { height: 7px; background: #1f2937; border-radius: 2px; }
+.btt-rule { height: 2px; border-radius: 1px; }
+.btt-line {
+  height: 4px; background: #d1d5db; border-radius: 2px;
+  margin: 3px 8px 0; flex-shrink: 0;
+}
+.btt-line.w55 { width: 55%; } .btt-line.w60 { width: 60%; }
+.btt-line.w65 { width: 65%; } .btt-line.w70 { width: 70%; }
+.btt-line.w75 { width: 75%; } .btt-line.w80 { width: 80%; }
+.btt-line.w90 { width: 90%; }
+
+/* Hover overlay */
+.btpl-overlay {
+  position: absolute; inset: 0;
+  background: rgba(15,23,42,0.62);
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0; transition: opacity 0.18s;
+  backdrop-filter: blur(1px);
+}
+.btpl-card:hover .btpl-overlay { opacity: 1; }
+.btpl-card.active .btpl-overlay { opacity: 0; }
+
+.btpl-use-btn {
+  background: var(--primary); color: #fff; border: none;
+  padding: 5px 16px; border-radius: 6px; font-size: 0.75rem;
+  font-weight: 700; cursor: pointer; font-family: var(--font-body);
+}
+
+.btpl-name {
+  display: block; font-size: 0.7rem; font-weight: 600;
+  padding: 5px 8px; color: var(--text);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}

@@ -417,6 +417,17 @@ var SAMPLE_DATA_BUILDER = {
   certifications: [{ name: 'Google UX Design Certificate', issuer: 'Google', year: '2022' }]
 };
 
+// Called by hardcoded thumbnail onclick handlers
+function selectTemplate(key, el) {
+  currentTemplate = key;
+  // Update active state
+  document.querySelectorAll('.btpl-card').forEach(function(c) {
+    c.classList.toggle('active', c.dataset.template === key);
+  });
+  updatePreview();
+  saveResume(true);
+}
+
 function setupTemplatePanel() {
   const grid = document.getElementById('template-grid');
   if (!grid) return;
@@ -456,7 +467,7 @@ function setupTemplatePanel() {
 }
 
 function highlightTemplate(key) {
-  document.querySelectorAll('.template-card-sm').forEach(t => {
+  document.querySelectorAll('.btpl-card, .template-card-sm').forEach(t => {
     t.classList.toggle('active', t.dataset.template === key);
   });
 }
