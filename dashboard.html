@@ -286,122 +286,164 @@
   </script>
 
   <script>
-  // ─── SAMPLE DATA & TEMPLATE GRID ─────────────────────────────────────────
+  // ─── SAMPLE RESUME DATA (used only for full-size Preview modal) ──────────
   var SAMPLE_RESUME = {
-    personal: {
-      fullName: 'Alex Morgan', title: 'Senior Product Designer',
-      email: 'alex@email.com', phone: '+1 (415) 555-0192',
-      location: 'San Francisco, CA', linkedin: 'linkedin.com/in/alexmorgan',
-      portfolio: 'alexmorgan.design',
-      summary: 'Creative product designer with 8+ years building user-centered digital experiences for Fortune 500 companies. Led design systems adopted by 200+ engineers across 12 product teams.'
-    },
+    personal: { fullName: 'Alex Morgan', title: 'Senior Product Designer', email: 'alex@email.com', phone: '+1 (415) 555-0192', location: 'San Francisco, CA', linkedin: 'linkedin.com/in/alexmorgan', portfolio: 'alexmorgan.design', summary: 'Creative product designer with 8+ years building user-centered digital experiences for Fortune 500 companies. Led design systems adopted by 200+ engineers across 12 product teams.' },
     experience: [
-      { company: 'Stripe', position: 'Senior Product Designer', startDate: 'Mar 2021', endDate: '', current: true,
-        bullets: ['Led redesign of checkout flow, improving conversion by 34%', 'Built design system used across 12 product teams', 'Mentored 4 junior designers through weekly 1:1 coaching sessions'] },
-      { company: 'Airbnb', position: 'Product Designer', startDate: 'Jun 2018', endDate: 'Feb 2021', current: false,
-        bullets: ['Designed host onboarding experience, reducing drop-off by 28%', 'Collaborated with 6 engineers to ship mobile app redesign on schedule'] }
+      { company: 'Stripe', position: 'Senior Product Designer', startDate: 'Mar 2021', endDate: '', current: true, bullets: ['Led redesign of checkout flow, improving conversion by 34%', 'Built design system used across 12 product teams', 'Mentored 4 junior designers through weekly 1:1 coaching sessions'] },
+      { company: 'Airbnb', position: 'Product Designer', startDate: 'Jun 2018', endDate: 'Feb 2021', current: false, bullets: ['Designed host onboarding experience, reducing drop-off by 28%', 'Collaborated with 6 engineers to ship mobile app redesign on schedule'] }
     ],
-    education: [
-      { school: 'Carnegie Mellon University', degree: "Bachelor's", field: 'Human-Computer Interaction', startDate: 'Sep 2013', endDate: 'May 2017', honors: 'Cum Laude, 3.9 GPA' }
-    ],
-    skills: {
-      technical: ['Figma', 'Sketch', 'Prototyping', 'User Research', 'Wireframing', 'Usability Testing'],
-      tools: ['Jira', 'Notion', 'Zeplin', 'HTML/CSS', 'Lottie'],
-      soft: ['Leadership', 'Communication', 'Stakeholder Management', 'Agile'],
-      languages: ['English (Native)', 'French (Conversational)']
-    },
-    projects: [
-      { name: 'DesignOS', description: 'Open-source design token system used by 500+ designers globally.', technologies: 'Figma Tokens, Storybook, CSS Variables', link: 'github.com/alexmorgan/designos' }
-    ],
-    certifications: [
-      { name: 'Google UX Design Certificate', issuer: 'Google', year: '2022' },
-      { name: 'Certified ScrumMaster (CSM)', issuer: 'Scrum Alliance', year: '2021' }
-    ]
+    education: [{ school: 'Carnegie Mellon University', degree: "Bachelor's", field: 'Human-Computer Interaction', startDate: 'Sep 2013', endDate: 'May 2017', honors: 'Cum Laude, 3.9 GPA' }],
+    skills: { technical: ['Figma', 'Sketch', 'Prototyping', 'User Research', 'Wireframing'], tools: ['Jira', 'Notion', 'Zeplin', 'HTML/CSS', 'Lottie'], soft: ['Leadership', 'Communication', 'Stakeholder Management'], languages: ['English (Native)', 'French (Conversational)'] },
+    projects: [{ name: 'DesignOS', description: 'Open-source design token system used by 500+ designers globally.', technologies: 'Figma Tokens, Storybook, CSS Variables', link: 'github.com/alexmorgan/designos' }],
+    certifications: [{ name: 'Google UX Design Certificate', issuer: 'Google', year: '2022' }, { name: 'Certified ScrumMaster (CSM)', issuer: 'Scrum Alliance', year: '2021' }]
   };
 
-  var TEMPLATE_LIST = [
-    { key: 'classic',   name: 'Classic ATS',      desc: 'Single-column, max ATS compatibility' },
-    { key: 'modern',    name: 'Modern Bold',       desc: 'Bold typography, clean section dividers' },
-    { key: 'corporate', name: 'Corporate Blue',    desc: 'Navy header, structured & professional' },
-    { key: 'creative',  name: 'Creative Sidebar',  desc: 'Two-column with coloured sidebar' },
-    { key: 'swiss',     name: 'Swiss Minimal',     desc: 'Google-style horizontal layout' },
-    { key: 'executive', name: 'Executive',         desc: 'Serif elegance, refined double-rule header' },
-    { key: 'tech',      name: 'Tech Developer',    desc: 'Terminal dark header, code-inspired' },
-    { key: 'timeline',  name: 'Timeline',          desc: 'Vertical dot-and-line timeline structure' },
-    { key: 'twoColumn', name: 'Two-Column Pro',    desc: 'Skills sidebar with bold section headers' },
-    { key: 'compact',   name: 'Compact One-Page',  desc: 'Dense layout — maximizes every inch' }
+  // ─── TEMPLATE DEFINITIONS ─────────────────────────────────────────────────
+  // thumb config: header bg color, optional sidebar color, line accent
+  var TEMPLATES_CONFIG = [
+    { key: 'classic',   name: 'Classic ATS',      desc: 'Single-column, max ATS score',         headerBg: '#1a365d',  style: 'single' },
+    { key: 'modern',    name: 'Modern Bold',       desc: 'Bold typography, clean dividers',       headerBg: '#2563eb',  style: 'top-stripe' },
+    { key: 'corporate', name: 'Corporate Blue',    desc: 'Navy header, structured sections',      headerBg: '#1e3a5f',  style: 'header-block' },
+    { key: 'creative',  name: 'Creative Sidebar',  desc: 'Two-column with coloured sidebar',      headerBg: '#7c3aed',  style: 'sidebar' },
+    { key: 'swiss',     name: 'Swiss Minimal',     desc: 'Google-style horizontal layout',        headerBg: '#d97706',  style: 'ruled' },
+    { key: 'executive', name: 'Executive',         desc: 'Serif elegance, refined header',        headerBg: '#7f1d1d',  style: 'rule-center' },
+    { key: 'tech',      name: 'Tech Developer',    desc: 'Terminal dark theme',                   headerBg: '#0d1117',  style: 'dark' },
+    { key: 'timeline',  name: 'Timeline',          desc: 'Vertical dot-line structure',           headerBg: '#0891b2',  style: 'timeline' },
+    { key: 'twoColumn', name: 'Two-Column Pro',    desc: 'Skills sidebar, bold headers',          headerBg: '#0f4c75',  style: 'two-col' },
+    { key: 'compact',   name: 'Compact One-Page',  desc: 'Dense — maximizes every inch',          headerBg: '#065f46',  style: 'compact' }
   ];
 
-  var _pendingTemplateKey = null;
-
+  // ─── BUILD STATIC THUMBNAIL GRID ─────────────────────────────────────────
   function buildTemplateModal() {
     var grid = document.getElementById('tpl-modal-grid');
-    if (!grid || typeof renderResume !== 'function') return;
-    grid.innerHTML = '';
+    if (!grid) return;
+    if (grid.children.length > 0) return; // already built
 
-    TEMPLATE_LIST.forEach(function(tpl) {
+    grid.innerHTML = '';
+    TEMPLATES_CONFIG.forEach(function(tpl) {
       var card = document.createElement('div');
       card.className = 'tpl-modal-card';
-      card.dataset.key = tpl.key;
-
-      var previewHtml = renderResume(SAMPLE_RESUME, tpl.key, {});
 
       card.innerHTML =
-        '<div class="tpl-mini-frame">' +
-          '<div class="tpl-mini-scaler">' + previewHtml + '</div>' +
+        '<div class="tpl-thumb tpl-thumb-' + tpl.key + '" data-style="' + tpl.style + '">' +
+          _buildThumbHtml(tpl) +
+          // Hover overlay
           '<div class="tpl-card-overlay">' +
-            '<button class="tpl-overlay-btn primary" onclick="useTemplate('' + tpl.key + '');event.stopPropagation();">' +
-              '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px"><polyline points="20 6 9 17 4 12"/></svg>' +
-              'Use Template' +
+            '<button class="tpl-overlay-btn primary" onclick="createNewResume('' + tpl.key + '');event.stopPropagation();">' +
+              '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width:13px;height:13px"><polyline points="20 6 9 17 4 12"/></svg> Use Template' +
             '</button>' +
             '<button class="tpl-overlay-btn secondary" onclick="previewTemplate('' + tpl.key + '');event.stopPropagation();">' +
-              '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>' +
-              'Preview' +
+              '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:13px;height:13px"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg> Preview' +
             '</button>' +
           '</div>' +
         '</div>' +
-        '<div class="tpl-modal-info">' +
-          '<strong>' + tpl.name + '</strong>' +
-          '<span>' + tpl.desc + '</span>' +
-        '</div>';
+        '<div class="tpl-modal-info"><strong>' + tpl.name + '</strong><span>' + tpl.desc + '</span></div>';
 
       grid.appendChild(card);
     });
   }
 
-  function useTemplate(key) {
-    createNewResume(key);
+  function _buildThumbHtml(tpl) {
+    var h = tpl.headerBg;
+    var s = tpl.style;
+
+    if (s === 'sidebar') {
+      return '<div class="tt-sidebar-col" style="background:' + h + '"></div>' +
+             '<div class="tt-sidebar-main"><div class="tt-line w70"></div><div class="tt-line w55"></div><div class="tt-line w80"></div><div class="tt-line w60"></div></div>';
+    }
+    if (s === 'two-col') {
+      return '<div class="tt-header" style="background:' + h + ';height:26px"></div>' +
+             '<div class="tt-two-col-body">' +
+               '<div class="tt-left-sm" style="background:#f0f4f8"></div>' +
+               '<div class="tt-right-sm"><div class="tt-line w80"></div><div class="tt-line w60"></div><div class="tt-line w70"></div></div>' +
+             '</div>';
+    }
+    if (s === 'dark') {
+      return '<div class="tt-dark-header"><div class="tt-dots"><span></span><span></span><span></span></div>' +
+             '<div class="tt-line tt-line-dim w70"></div><div class="tt-line tt-line-dim w50"></div></div>' +
+             '<div class="tt-lines-dark"><div class="tt-line tt-line-dim w80"></div><div class="tt-line tt-line-dim w60"></div><div class="tt-line tt-line-dim w75"></div></div>';
+    }
+    if (s === 'top-stripe') {
+      return '<div class="tt-top-stripe" style="background:' + h + '"></div>' +
+             '<div class="tt-name-block"><div class="tt-name-bar"></div><div class="tt-line w55" style="margin-top:3px"></div></div>' +
+             '<div class="tt-rule" style="background:' + h + '"></div>' +
+             '<div class="tt-line w80"></div><div class="tt-line w65"></div><div class="tt-line w75"></div>';
+    }
+    if (s === 'ruled') {
+      return '<div class="tt-ruled-top"><div class="tt-name-bar w55"></div><div class="tt-line w40"></div></div>' +
+             '<div class="tt-rule" style="background:' + h + ';height:3px"></div>' +
+             '<div class="tt-line w80" style="margin-top:6px"></div><div class="tt-line w65"></div><div class="tt-line w70"></div>';
+    }
+    if (s === 'rule-center') {
+      return '<div style="text-align:center;padding:8px 10px 4px"><div class="tt-name-bar" style="margin:0 auto;width:55%"></div>' +
+             '<div class="tt-line w40" style="margin:3px auto"></div></div>' +
+             '<div class="tt-rule" style="background:' + h + '"></div>' +
+             '<div style="padding:0 10px"><div class="tt-line w80"></div><div class="tt-line w65"></div><div class="tt-line w70"></div></div>';
+    }
+    if (s === 'timeline') {
+      return '<div style="padding:8px 8px 4px"><div class="tt-name-bar w60"></div></div>' +
+             '<div class="tt-rule" style="background:' + h + '"></div>' +
+             '<div class="tt-tl-rows">' +
+               '<div class="tt-tl-row"><div class="tt-dot" style="background:' + h + '"></div><div class="tt-line w65"></div></div>' +
+               '<div class="tt-tl-vline" style="background:' + h + '"></div>' +
+               '<div class="tt-tl-row"><div class="tt-dot" style="background:' + h + '"></div><div class="tt-line w55"></div></div>' +
+               '<div class="tt-tl-vline" style="background:' + h + '"></div>' +
+               '<div class="tt-tl-row"><div class="tt-dot" style="background:' + h + '"></div><div class="tt-line w70"></div></div>' +
+             '</div>';
+    }
+    if (s === 'compact') {
+      return '<div class="tt-compact-top" style="border-bottom:2px solid ' + h + '">' +
+               '<div class="tt-name-bar w55"></div>' +
+             '</div>' +
+             '<div class="tt-compact-rows">' +
+               '<div class="tt-compact-row"><span class="tt-compact-label" style="color:' + h + '">EXP</span><div class="tt-line w70"></div></div>' +
+               '<div class="tt-compact-row"><span class="tt-compact-label" style="color:' + h + '">SKL</span><div class="tt-line w65"></div></div>' +
+               '<div class="tt-compact-row"><span class="tt-compact-label" style="color:' + h + '">EDU</span><div class="tt-line w60"></div></div>' +
+             '</div>';
+    }
+    // default: single-column / header-block
+    return '<div class="tt-header" style="background:' + h + '"></div>' +
+           '<div class="tt-line w80"></div>' +
+           '<div class="tt-line w65"></div>' +
+           '<div class="tt-line w90"></div>' +
+           '<div class="tt-line w55"></div>' +
+           '<div class="tt-line w75"></div>';
   }
 
-  function previewTemplate(key) {
-    var tpl = TEMPLATE_LIST.find(function(t){ return t.key === key; });
-    if (!tpl || typeof renderResume !== 'function') return;
+  // ─── PREVIEW MODAL ───────────────────────────────────────────────────────
+  var _pendingTemplateKey = null;
 
+  function previewTemplate(key) {
+    var tpl = TEMPLATES_CONFIG.find(function(t){ return t.key === key; });
+    if (!tpl) return;
     _pendingTemplateKey = key;
+
     document.getElementById('preview-modal-title').textContent = tpl.name;
     document.getElementById('preview-modal-desc').textContent = tpl.desc;
 
-    // Render full-size resume
     var resumeEl = document.getElementById('preview-modal-resume');
-    resumeEl.innerHTML = renderResume(SAMPLE_RESUME, key, {});
+    if (typeof renderResume === 'function') {
+      resumeEl.innerHTML = renderResume(SAMPLE_RESUME, key, {});
+    } else {
+      resumeEl.innerHTML = '<div style="padding:40px;text-align:center;color:#6b7280">Preview not available</div>';
+    }
 
-    // Scale to fit the modal body
-    var modal = document.getElementById('preview-modal');
-    modal.classList.add('open');
+    document.getElementById('preview-modal').classList.add('open');
 
-    // Scale the preview to fit width
+    // Scale to fit modal width
     setTimeout(function() {
-      var body = document.querySelector('.preview-modal-body');
-      var el   = document.querySelector('.preview-modal-resume');
+      var body  = document.querySelector('.preview-modal-body');
+      var el    = document.getElementById('preview-modal-resume');
       if (!body || !el) return;
       var avail = body.clientWidth - 48;
       var scale = Math.min(1, avail / 794);
       el.style.transform = 'scale(' + scale + ')';
       el.style.transformOrigin = 'top center';
-      el.style.marginBottom = ((1123 * scale) - 1123) + 'px';
-    }, 50);
+      // collapse the extra whitespace below
+      el.style.marginBottom = ((297 * 3.7795 * scale) - (297 * 3.7795)) + 'px';
+    }, 60);
 
-    // Wire up the "Use Template" button
     document.getElementById('btn-use-template').onclick = function() {
       createNewResume(_pendingTemplateKey);
     };
@@ -411,18 +453,15 @@
     document.getElementById('preview-modal').classList.remove('open');
   }
 
-  // Build when modal opens
+  // Override openTemplatesModal to also build the grid
+  var _origOpen = window.openTemplatesModal;
   window.openTemplatesModal = function() {
     document.getElementById('templates-modal').classList.add('open');
-    setTimeout(buildTemplateModal, 10);
+    buildTemplateModal();
   };
 
   document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape') {
-      closePreviewModal();
-      closeTemplatesModal();
-      closeATSModal();
-    }
+    if (e.key === 'Escape') { closePreviewModal(); }
   });
   </script>
 </body>
