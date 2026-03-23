@@ -583,25 +583,16 @@
 
 
   <script>
-  // ─── ZOOM SLIDER LOGIC ────────────────────────────────────────────────────
+  // ─── ZOOM SLIDER — paper only, frame never moves ─────────────────────────
   (function() {
     var slider    = document.getElementById('zoom-slider');
     var zoomOut   = document.getElementById('zoom-out');
     var zoomIn    = document.getElementById('zoom-in');
     var zoomFit   = document.getElementById('zoom-fit');
     var label     = document.getElementById('zoom-label');
-    var container = document.getElementById('preview-scale-container');
     var wrapper   = document.getElementById('preview-wrapper');
-    var scrollArea = document.getElementById('preview-scroll-area');
+    // A4 natural dimensions at 96dpi
     var A4W = 794, A4H = 1123;
-
-    function calcFitScale() {
-      var area = scrollArea || document.querySelector('.builder-center');
-      if (!area) return 0.7;
-      var avail = area.clientWidth - 48; // 24px padding each side
-      var s = Math.min(1, avail / A4W);
-      return Math.max(0.35, Math.round(s * 20) / 20); // round to nearest 0.05
-    }
 
     function applyZoom(val) {
       val = Math.max(40, Math.min(100, val));
@@ -609,26 +600,32 @@
       if (label) label.textContent = val + '%';
       var scale = val / 100;
 
-      // Only scale the paper (wrapper), never touch the container size.
-      // The scroll area stays fixed — only the A4 sheet zooms inside it.
-      if (wrapper) {
-        wrapper.style.transform = 'scale(' + scale + ')';
-        wrapper.style.transformOrigin = 'top center';
-        // Collapse the whitespace below the scaled-down paper
-        wrapper.style.marginBottom = Math.round((A4H * scale) - A4H) + 'px';
-      }
-      // Keep container wide enough to show the paper at its natural width
-      if (container) {
-        container.style.width = Math.round(A4W * scale) + 'px';
-        container.style.height = Math.round(A4H * scale) + 'px';
-      }
+      if (!wrapper) return;
+
+      // Scale ONLY the paper. transform-origin: top center keeps it
+      // horizontally centered and anchored at the top of the scroll area.
+      wrapper.style.transform = 'scale(' + scale + ')';
+      wrapper.style.transformOrigin = 'top center';
+
+      // CSS transform doesn't affect layout — the wrapper still occupies
+      // its natural 794×1123px box in the DOM. Use a negative bottom margin
+      // to close the gap that appears when the paper shrinks below 100%.
+      // At scale 1.0 → marginBottom = 0
+      // At scale 0.5 → marginBottom = -(1123 * 0.5) = -561px  (removes empty space)
+      var collapsePx = Math.round(A4H * scale - A4H); // always ≤ 0
+      wrapper.style.marginBottom = collapsePx + 'px';
     }
 
-    // Initial fit — called once on load then user controls with slider
+    function calcFit() {
+      var area = document.getElementById('preview-scroll-area');
+      if (!area) return 70;
+      var avail = area.clientWidth - 64; // leave 32px breathing room each side
+      var s = Math.min(1, avail / A4W);
+      return Math.round(s * 20) * 5; // snap to nearest 5%
+    }
+
     function fitToWindow() {
-      var s = calcFitScale();
-      var pct = Math.round(s * 100 / 5) * 5; // snap to nearest 5%
-      applyZoom(Math.max(40, Math.min(100, pct)));
+      applyZoom(Math.max(40, Math.min(100, calcFit())));
     }
 
     if (slider)  slider.addEventListener('input', function() { applyZoom(parseInt(this.value)); });
@@ -636,15 +633,8 @@
     if (zoomIn)  zoomIn.addEventListener('click',  function() { applyZoom(parseInt(slider.value) + 5); });
     if (zoomFit) zoomFit.addEventListener('click',  fitToWindow);
 
-    // Override fitPreview for initial load
     window.fitPreview = fitToWindow;
-
-    document.addEventListener('DOMContentLoaded', function() {
-      setTimeout(fitToWindow, 100);
-    });
-    window.addEventListener('resize', function() {
-      // Only auto-refit if at a "fit" level (don't fight manual zoom)
-    });
+    document.addEventListener('DOMContentLoaded', function() { setTimeout(fitToWindow, 80); });
   })();
   </script>
 </body>
