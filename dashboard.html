@@ -95,15 +95,6 @@
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="js/config.js"></script>
   <script src="js/dashboard.js"></script>
-  <script>
-    // Set avatar initial from email
-    window.addEventListener('DOMContentLoaded', async () => {
-      const { data: { user } } = await supabase.auth.getUser();
-      if (user) {
-        const initial = user.email[0].toUpperCase();
-        document.getElementById('user-avatar').textContent = initial;
-      }
-    });
-  </script>
+
 </body>
 </html>

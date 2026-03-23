@@ -1,7 +1,9 @@
 const SUPABASE_URL = 'https://svpzqfitcphmhqzansoe.supabase.co';
 const SUPABASE_KEY = 'sb_publishable_r5c2naf1HqiCt_C2sK-cqw_MXYbo2bj';
 
-const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+// Alias the CDN lib to avoid naming collision with our client variable
+const _supabaseLib = window.supabase;
+const supabase = _supabaseLib.createClient(SUPABASE_URL, SUPABASE_KEY);
 
 function uid() {
   return crypto.randomUUID ? crypto.randomUUID() : Math.random().toString(36).slice(2);

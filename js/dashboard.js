@@ -7,6 +7,8 @@ document.addEventListener('DOMContentLoaded', async () => {
   if (!currentUser) return;
 
   document.getElementById('user-email').textContent = currentUser.email;
+  const avatarEl = document.getElementById('user-avatar');
+  if (avatarEl) avatarEl.textContent = currentUser.email[0].toUpperCase();
   loadResumes();
 
   document.getElementById('btn-logout').addEventListener('click', async () => {
