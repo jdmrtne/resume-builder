@@ -111,7 +111,7 @@ function resumeCard(r) {
     </div>`;
 }
 
-async function createNewResume() {
+async function createNewResume(template) {
   const defaultData = {
     personal: { fullName: '', title: '', email: '', phone: '', location: '', linkedin: '', portfolio: '', summary: '' },
     experience: [],
@@ -125,7 +125,7 @@ async function createNewResume() {
     user_id: currentUser.id,
     title: 'New Resume',
     data_json: defaultData,
-    template: 'classic',
+    template: template || 'classic',
     is_public: false
   }).select().single();
 

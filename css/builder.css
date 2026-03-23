@@ -326,3 +326,59 @@ body.sidebar-expanded .builder-body {
 .tpl-mini-timeline .tpl-mini-header { background: #0891b2; width: 3px; height: 100%; position: absolute; border-radius: 0; }
 .tpl-mini-twoColumn .tpl-mini-header { background: #0f4c75; }
 .tpl-mini-compact .tpl-mini-header { background: #065f46; height: 2px; border-radius: 0; }
+
+/* ─── ZOOM CONTROL (MS Office style) ─────────────────────────────────────── */
+.zoom-control {
+  display: flex; align-items: center; gap: 6px;
+  background: var(--bg); border: 1.5px solid var(--border);
+  border-radius: 8px; padding: 4px 10px; height: 34px;
+}
+.zoom-btn {
+  width: 22px; height: 22px; border-radius: 5px; border: none;
+  background: transparent; cursor: pointer; color: var(--text-2);
+  display: flex; align-items: center; justify-content: center;
+  transition: background 0.15s;
+  flex-shrink: 0;
+}
+.zoom-btn:hover { background: var(--border); color: var(--text); }
+.zoom-slider-track { width: 90px; display: flex; align-items: center; }
+#zoom-slider {
+  -webkit-appearance: none; appearance: none;
+  width: 100%; height: 4px;
+  background: var(--border); border-radius: 2px; outline: none;
+  cursor: pointer;
+}
+#zoom-slider::-webkit-slider-thumb {
+  -webkit-appearance: none; appearance: none;
+  width: 14px; height: 14px; border-radius: 50%;
+  background: var(--primary); cursor: pointer;
+  box-shadow: 0 0 0 2px #fff, 0 0 0 3px var(--primary);
+  transition: transform 0.15s;
+}
+#zoom-slider::-webkit-slider-thumb:hover { transform: scale(1.2); }
+#zoom-slider::-moz-range-thumb {
+  width: 14px; height: 14px; border-radius: 50%; border: none;
+  background: var(--primary); cursor: pointer;
+}
+.zoom-label {
+  font-size: 0.78rem; font-weight: 700; color: var(--text-2);
+  min-width: 34px; text-align: right; white-space: nowrap;
+}
+
+/* ─── BUILDER SIDEBAR ICON FIXES ─────────────────────────────────────────── */
+.builder-topbar { gap: 10px; }
+.builder-topbar .topbar-back {
+  display: flex; align-items: center; gap: 4px;
+  color: var(--text-2); text-decoration: none; font-size: 0.85rem;
+  padding: 6px 10px; border-radius: 7px; transition: all 0.15s;
+  white-space: nowrap;
+}
+.builder-topbar .topbar-back:hover { background: var(--bg); color: var(--primary); }
+#btn-save {
+  display: flex; align-items: center; gap: 6px;
+  background: var(--primary); color: #fff; border: none;
+  padding: 8px 16px; border-radius: 8px; font-weight: 600;
+  font-size: 0.875rem; cursor: pointer; transition: background 0.2s;
+  font-family: var(--font-body);
+}
+#btn-save:hover { background: var(--primary-dark); }

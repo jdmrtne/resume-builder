@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Resume Builder — ResumeForge</title>
   <link rel="stylesheet" href="css/main.css" />
+  <link rel="stylesheet" href="css/dashboard-extra.css" />
   <link rel="stylesheet" href="css/builder.css" />
   <link rel="stylesheet" href="css/templates.css" />
 </head>
@@ -14,27 +15,61 @@
     <!-- Sidebar -->
     <aside class="sidebar">
       <div class="sidebar-logo">
-        <span class="logo-icon">⚡</span>
+        <svg class="logo-svg" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" fill="#f97316" stroke="#f97316" stroke-width="1" stroke-linejoin="round"/>
+        </svg>
         <span class="logo-text">ResumeForge</span>
       </div>
       <nav class="sidebar-nav">
-        <a class="nav-item" href="dashboard.html">
-          <span class="nav-icon">◀</span>
+        <a class="nav-item active" href="dashboard.html" title="Dashboard">
+          <svg class="nav-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/>
+          </svg>
           <span>Dashboard</span>
         </a>
       </nav>
       <div class="sidebar-bottom">
-        <button id="btn-logout">Sign Out</button>
+        <div class="user-info">
+          <div class="user-avatar" id="user-avatar">R</div>
+          <span class="user-email" id="user-email"></span>
+        </div>
+        <button id="btn-logout" title="Sign Out">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;flex-shrink:0">
+            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/>
+          </svg>
+          <span class="btn-logout-text">Sign Out</span>
+        </button>
       </div>
     </aside>
 
     <!-- Top Bar -->
     <div class="builder-topbar">
-      <a href="dashboard.html" class="topbar-back">← Dashboard</a>
+      <a href="dashboard.html" class="topbar-back">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px"><polyline points="15 18 9 12 15 6"/></svg>
+        Dashboard
+      </a>
       <input type="text" id="resume-title-input" class="topbar-title-input" placeholder="Untitled Resume" />
       <div class="topbar-spacer"></div>
+
+      <!-- Zoom Slider (MS Office style) -->
+      <div class="zoom-control" id="zoom-control">
+        <button class="zoom-btn" id="zoom-out" title="Zoom Out">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" style="width:12px;height:12px"><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </button>
+        <div class="zoom-slider-track">
+          <input type="range" id="zoom-slider" min="40" max="100" value="70" step="5" title="Zoom level" />
+        </div>
+        <button class="zoom-btn" id="zoom-in" title="Zoom In">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" style="width:12px;height:12px"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </button>
+        <span class="zoom-label" id="zoom-label">70%</span>
+      </div>
+
       <div class="topbar-actions">
-        <button id="btn-save">💾 Save</button>
+        <button id="btn-save">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+          Save
+        </button>
       </div>
     </div>
 
@@ -392,6 +427,61 @@
     }
     fitPreview();
   });
+  </script>
+
+  <script>
+  // ─── ZOOM SLIDER LOGIC ────────────────────────────────────────────────────
+  (function() {
+    var slider   = document.getElementById('zoom-slider');
+    var zoomOut  = document.getElementById('zoom-out');
+    var zoomIn   = document.getElementById('zoom-in');
+    var label    = document.getElementById('zoom-label');
+    var container = document.getElementById('preview-scale-container');
+    var wrapper   = document.getElementById('preview-wrapper');
+
+    function applyZoom(val) {
+      val = Math.max(40, Math.min(100, val));
+      slider.value = val;
+      label.textContent = val + '%';
+      var scale = val / 100;
+      var A4W = 794, A4H = 1123;
+      if (container) {
+        container.style.setProperty('--preview-scale', scale);
+        container.style.width  = (A4W * scale) + 'px';
+        container.style.minHeight = (A4H * scale) + 'px';
+      }
+      if (wrapper) {
+        wrapper.style.setProperty('--preview-scale', scale);
+        wrapper.style.transform = 'scale(' + scale + ')';
+      }
+    }
+
+    if (slider) {
+      slider.addEventListener('input', function() { applyZoom(parseInt(this.value)); });
+    }
+    if (zoomOut) {
+      zoomOut.addEventListener('click', function() { applyZoom(parseInt(slider.value) - 5); });
+    }
+    if (zoomIn) {
+      zoomIn.addEventListener('click', function() { applyZoom(parseInt(slider.value) + 5); });
+    }
+
+    // Override the fitPreview auto-scale to only set initial value, not fight with slider
+    var _fitDone = false;
+    var _origFit = window.fitPreview;
+    window.fitPreview = function() {
+      if (_fitDone) return; // after first fit, slider takes over
+      _fitDone = true;
+      var center = document.querySelector('.builder-center');
+      if (!center) return;
+      var A4W = 794, padding = 48;
+      var availW = center.clientWidth - padding;
+      var autoScale = Math.min(1, availW / A4W);
+      var pct = Math.round(autoScale * 100 / 5) * 5; // round to nearest 5
+      pct = Math.max(40, Math.min(100, pct));
+      applyZoom(pct);
+    };
+  })();
   </script>
 </body>
 </html>
