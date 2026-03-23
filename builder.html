@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Resume Builder — ResumeForge</title>
+  <link rel="stylesheet" href="css/main.css" />
+  <link rel="stylesheet" href="css/builder.css" />
+  <link rel="stylesheet" href="css/templates.css" />
+</head>
+<body>
+  <div class="app-layout">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-logo">
+        <span class="logo-icon">⚡</span>
+        <span class="logo-text">ResumeForge</span>
+      </div>
+      <nav class="sidebar-nav">
+        <a class="nav-item" href="dashboard.html">
+          <span class="nav-icon">◀</span>
+          <span>Dashboard</span>
+        </a>
+      </nav>
+      <div class="sidebar-bottom">
+        <button id="btn-logout">Sign Out</button>
+      </div>
+    </aside>
+
+    <!-- Top Bar -->
+    <div class="builder-topbar">
+      <a href="dashboard.html" class="topbar-back">← Dashboard</a>
+      <input type="text" id="resume-title-input" class="topbar-title-input" placeholder="Untitled Resume" />
+      <div class="topbar-spacer"></div>
+      <div class="topbar-actions">
+        <button id="btn-save">💾 Save</button>
+      </div>
+    </div>
+
+    <!-- Builder Body: Left | Center | Right -->
+    <div class="builder-body">
+
+      <!-- ─── LEFT PANEL: FORM ─────────────────────────────────────────── -->
+      <div class="builder-left">
+        <nav class="section-nav">
+          <button class="nav-section-btn active" data-section="personal">
+            <span class="nav-icon">👤</span> Personal Info
+          </button>
+          <button class="nav-section-btn" data-section="experience">
+            <span class="nav-icon">💼</span> Experience
+          </button>
+          <button class="nav-section-btn" data-section="education">
+            <span class="nav-icon">🎓</span> Education
+          </button>
+          <button class="nav-section-btn" data-section="skills">
+            <span class="nav-icon">⚡</span> Skills
+          </button>
+          <button class="nav-section-btn" data-section="projects">
+            <span class="nav-icon">🗂</span> Projects
+          </button>
+          <button class="nav-section-btn" data-section="certifications">
+            <span class="nav-icon">🏅</span> Certifications
+          </button>
+        </nav>
+
+        <div class="form-scroll">
+
+          <!-- Personal -->
+          <div class="form-section active" id="section-personal">
+            <div class="form-section-title">Personal Information</div>
+            <div class="field-row">
+              <div class="field-group">
+                <label>Full Name</label>
+                <input id="full-name" type="text" placeholder="Jane Smith" />
+              </div>
+              <div class="field-group">
+                <label>Professional Title</label>
+                <input id="prof-title" type="text" placeholder="Software Engineer" />
+              </div>
+            </div>
+            <div class="field-row">
+              <div class="field-group">
+                <label>Email</label>
+                <input id="email" type="email" placeholder="jane@email.com" />
+              </div>
+              <div class="field-group">
+                <label>Phone</label>
+                <input id="phone" type="tel" placeholder="+1 (555) 000-0000" />
+              </div>
+            </div>
+            <div class="field-group">
+              <label>Location</label>
+              <input id="location" type="text" placeholder="New York, NY" />
+            </div>
+            <div class="field-group">
+              <label>LinkedIn URL</label>
+              <input id="linkedin" type="url" placeholder="linkedin.com/in/janesmith" />
+            </div>
+            <div class="field-group">
+              <label>Portfolio / Website</label>
+              <input id="portfolio" type="url" placeholder="janesmith.com" />
+            </div>
+            <div class="field-group">
+              <label>Professional Summary</label>
+              <textarea id="summary" rows="5" placeholder="Write 2–3 sentences highlighting your top skills, years of experience, and what makes you a great candidate…"></textarea>
+            </div>
+          </div>
+
+          <!-- Experience -->
+          <div class="form-section" id="section-experience">
+            <div class="form-section-title">Work Experience</div>
+            <div id="experience-list"></div>
+            <button class="btn-add-entry" id="btn-add-exp">+ Add Work Experience</button>
+          </div>
+
+          <!-- Education -->
+          <div class="form-section" id="section-education">
+            <div class="form-section-title">Education</div>
+            <div id="education-list"></div>
+            <button class="btn-add-entry" id="btn-add-edu">+ Add Education</button>
+          </div>
+
+          <!-- Skills -->
+          <div class="form-section" id="section-skills">
+            <div class="form-section-title">Skills</div>
+            <div class="field-group">
+              <label>Technical Skills</label>
+              <input id="skills-technical" type="text" placeholder="JavaScript, Python, React, SQL…" />
+              <div class="skills-hint">Separate skills with commas</div>
+            </div>
+            <div class="field-group">
+              <label>Tools & Platforms</label>
+              <input id="skills-tools" type="text" placeholder="Git, Docker, Figma, AWS, Jira…" />
+              <div class="skills-hint">Separate with commas</div>
+            </div>
+            <div class="field-group">
+              <label>Soft Skills</label>
+              <input id="skills-soft" type="text" placeholder="Leadership, Communication, Problem Solving…" />
+              <div class="skills-hint">Separate with commas</div>
+            </div>
+            <div class="field-group">
+              <label>Languages</label>
+              <input id="skills-languages" type="text" placeholder="English (Native), Spanish (Fluent)…" />
+              <div class="skills-hint">Separate with commas</div>
+            </div>
+          </div>
+
+          <!-- Projects -->
+          <div class="form-section" id="section-projects">
+            <div class="form-section-title">Projects</div>
+            <div id="projects-list"></div>
+            <button class="btn-add-entry" id="btn-add-proj">+ Add Project</button>
+          </div>
+
+          <!-- Certifications -->
+          <div class="form-section" id="section-certifications">
+            <div class="form-section-title">Certifications</div>
+            <div id="certifications-list"></div>
+            <button class="btn-add-entry" id="btn-add-cert">+ Add Certification</button>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ─── CENTER PANEL: LIVE PREVIEW ───────────────────────────────── -->
+      <div class="builder-center">
+        <div class="preview-wrapper">
+          <div id="resume-preview"></div>
+        </div>
+      </div>
+
+      <!-- ─── RIGHT PANEL: TOOLS ───────────────────────────────────────── -->
+      <div class="builder-right">
+
+        <div class="panel-tabs">
+          <button class="panel-tab active" data-panel="templates">Templates</button>
+          <button class="panel-tab" data-panel="customize">Style</button>
+          <button class="panel-tab" data-panel="ats">ATS</button>
+          <button class="panel-tab" data-panel="keywords">Keywords</button>
+          <button class="panel-tab" data-panel="ai">AI ✨</button>
+          <button class="panel-tab" data-panel="export">Export</button>
+        </div>
+
+        <div class="panel-scroll">
+
+          <!-- Templates Panel -->
+          <div class="panel-view active" id="panel-templates">
+            <p style="font-size:0.8rem;color:var(--text-2);margin-bottom:12px;">Choose a template for your resume</p>
+            <div class="template-grid" id="template-grid"></div>
+          </div>
+
+          <!-- Customize Panel -->
+          <div class="panel-view" id="panel-customize">
+            <div class="customize-section">
+              <h4>Accent Color</h4>
+              <div class="color-grid" id="color-presets">
+                <div class="color-swatch" style="background:#4f46e5" data-color="#4f46e5" title="Indigo"></div>
+                <div class="color-swatch" style="background:#1e3a5f" data-color="#1e3a5f" title="Navy"></div>
+                <div class="color-swatch" style="background:#047857" data-color="#047857" title="Emerald"></div>
+                <div class="color-swatch" style="background:#8b0000" data-color="#8b0000" title="Crimson"></div>
+                <div class="color-swatch" style="background:#7c3aed" data-color="#7c3aed" title="Violet"></div>
+                <div class="color-swatch" style="background:#e11d48" data-color="#e11d48" title="Rose"></div>
+                <div class="color-swatch" style="background:#f97316" data-color="#f97316" title="Orange"></div>
+                <div class="color-swatch" style="background:#0f766e" data-color="#0f766e" title="Teal"></div>
+                <div class="color-swatch" style="background:#1a1a1a" data-color="#1a1a1a" title="Black"></div>
+                <div class="color-swatch" style="background:#3b7cf4" data-color="#3b7cf4" title="Blue"></div>
+                <div class="color-swatch" style="background:#c2410c" data-color="#c2410c" title="Burnt Orange"></div>
+                <div class="color-swatch" style="background:#0369a1" data-color="#0369a1" title="Sky Blue"></div>
+              </div>
+              <div class="color-picker-row">
+                <input type="color" id="accent-color" value="#4f46e5" />
+                <span style="font-size:0.8rem;color:var(--text-2)">Custom color</span>
+              </div>
+            </div>
+
+            <div class="customize-section">
+              <h4>Font Family</h4>
+              <div class="field-group">
+                <select id="font-family">
+                  <option value="">Template Default</option>
+                  <option value="'Georgia', serif">Georgia (Serif)</option>
+                  <option value="'Garamond', 'Times New Roman', serif">Garamond (Classic)</option>
+                  <option value="'Palatino Linotype', serif">Palatino (Academic)</option>
+                  <option value="'Arial', sans-serif">Arial (Clean)</option>
+                  <option value="'Helvetica Neue', Arial, sans-serif">Helvetica Neue</option>
+                  <option value="'Calibri', sans-serif">Calibri (Modern)</option>
+                  <option value="'Trebuchet MS', sans-serif">Trebuchet MS</option>
+                  <option value="'Courier New', monospace">Courier New (Mono)</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="customize-section">
+              <h4>Font Size</h4>
+              <div class="range-row">
+                <input type="range" id="font-size" min="9" max="13" value="11" step="0.5" />
+                <span id="font-size-label">11px</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- ATS Panel -->
+          <div class="panel-view" id="panel-ats">
+            <p style="font-size:0.8rem;color:var(--text-2);margin-bottom:12px;">
+              Real-time ATS compatibility score based on your resume content.
+            </p>
+            <div id="ats-content">
+              <div style="text-align:center;padding:20px;color:var(--text-3);">Switch to this tab to analyze your resume</div>
+            </div>
+          </div>
+
+          <!-- Keywords Panel -->
+          <div class="panel-view" id="panel-keywords">
+            <p style="font-size:0.8rem;color:var(--text-2);margin-bottom:8px;">
+              Paste a job description to see which keywords you're missing.
+            </p>
+            <textarea id="job-description" placeholder="Paste job description here…"></textarea>
+            <div id="keyword-results">
+              <div class="keyword-empty">Paste a job description above to see keyword matches.</div>
+            </div>
+          </div>
+
+          <!-- AI Panel -->
+          <div class="panel-view" id="panel-ai">
+            <!-- Rendered by ai-generator.js -->
+          </div>
+
+          <!-- Export Panel -->
+          <div class="panel-view" id="panel-export">
+            <div class="export-section">
+              <h4>Download</h4>
+              <button class="export-btn primary-btn" id="btn-export-pdf">
+                <span class="btn-icon">⬇</span> Download PDF
+              </button>
+              <button class="export-btn" id="btn-print">
+                <span class="btn-icon">🖨</span> Print Resume
+              </button>
+              <button class="export-btn" id="btn-export-txt">
+                <span class="btn-icon">📃</span> Export Plain Text (ATS)
+              </button>
+            </div>
+            <div class="export-section">
+              <h4>Share Online</h4>
+              <button class="export-btn" id="btn-publish">
+                <span class="btn-icon">🌐</span> Publish / Get Public Link
+              </button>
+              <p style="font-size:0.75rem;color:var(--text-3);margin-top:6px;">
+                Creates a shareable link you can send to recruiters
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <script src="js/config.js"></script>
+  <script src="js/templates.js"></script>
+  <script src="js/ats-checker.js"></script>
+  <script src="js/keyword-checker.js"></script>
+  <script src="js/ai-generator.js"></script>
+  <script src="js/export.js"></script>
+  <script src="js/builder.js"></script>
+
+  <script>
+    // Color swatches
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('.color-swatch').forEach(sw => {
+        sw.addEventListener('click', () => {
+          document.querySelectorAll('.color-swatch').forEach(s => s.classList.remove('active'));
+          sw.classList.add('active');
+          const color = sw.dataset.color;
+          document.getElementById('accent-color').value = color;
+          customization.accentColor = color;
+          updatePreview();
+          saveResume(true);
+        });
+      });
+
+      // ATS panel auto-refresh when switching to it
+      document.getElementById('panel-ats').addEventListener('transitionend', updateATSPanel);
+    });
+  </script>
+</body>
+</html>

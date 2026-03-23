@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard — ResumeForge</title>
+  <link rel="stylesheet" href="css/main.css" />
+</head>
+<body>
+  <div class="app-layout">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-logo">
+        <span class="logo-icon">⚡</span>
+        <span class="logo-text">ResumeForge</span>
+      </div>
+      <nav class="sidebar-nav">
+        <a class="nav-item active" href="dashboard.html">
+          <span class="nav-icon">📄</span>
+          <span>My Resumes</span>
+        </a>
+        <a class="nav-item" href="#" onclick="createNewResume()">
+          <span class="nav-icon">➕</span>
+          <span>New Resume</span>
+        </a>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="user-info">
+          <div class="user-avatar" id="user-avatar">U</div>
+          <span class="user-email" id="user-email">Loading…</span>
+        </div>
+        <button id="btn-logout">Sign Out</button>
+      </div>
+    </aside>
+
+    <!-- Main -->
+    <main class="main-content">
+
+      <!-- Header -->
+      <div class="dash-header">
+        <div>
+          <h1>My Resumes</h1>
+          <p>Manage, edit, and publish your professional resumes</p>
+        </div>
+        <button class="btn-primary" id="btn-create">+ New Resume</button>
+      </div>
+
+      <!-- Stats -->
+      <div class="stats-row">
+        <div class="stat-card">
+          <div class="stat-num" id="stat-total">—</div>
+          <div class="stat-label">Total Resumes</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num" id="stat-public">—</div>
+          <div class="stat-label">Published Online</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">10</div>
+          <div class="stat-label">Templates Available</div>
+        </div>
+      </div>
+
+      <!-- Quick Actions -->
+      <div class="quick-actions">
+        <div class="action-card create-card" onclick="createNewResume()">
+          <div class="action-icon">✨</div>
+          <div class="action-title">Create New Resume</div>
+          <div class="action-desc">Start from scratch with AI assistance</div>
+        </div>
+        <div class="action-card" onclick="window.location.href='dashboard.html'">
+          <div class="action-icon">📋</div>
+          <div class="action-title">Browse Templates</div>
+          <div class="action-desc">10 professional designs to choose from</div>
+        </div>
+        <div class="action-card">
+          <div class="action-icon">💡</div>
+          <div class="action-title">ATS Tips</div>
+          <div class="action-desc">Optimize for applicant tracking systems</div>
+        </div>
+      </div>
+
+      <!-- Resume Grid -->
+      <div class="section-header">
+        <h2>Your Resumes</h2>
+      </div>
+      <div class="resume-grid" id="resume-grid">
+        <div class="loading-spinner"><span></span> Loading your resumes…</div>
+      </div>
+
+    </main>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/config.js"></script>
+  <script src="js/dashboard.js"></script>
+  <script>
+    // Set avatar initial from email
+    window.addEventListener('DOMContentLoaded', async () => {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (user) {
+        const initial = user.email[0].toUpperCase();
+        document.getElementById('user-avatar').textContent = initial;
+      }
+    });
+  </script>
+</body>
+</html>

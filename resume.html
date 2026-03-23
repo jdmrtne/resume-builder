@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Resume — ResumeForge</title>
+  <link rel="stylesheet" href="css/main.css" />
+  <link rel="stylesheet" href="css/templates.css" />
+  <style>
+    body { background: #e5e7eb; padding: 32px 16px; min-height: 100vh; }
+    .public-toolbar {
+      max-width: 870px; margin: 0 auto 20px;
+      display: flex; justify-content: space-between; align-items: center;
+      background: #fff; border-radius: 12px; padding: 14px 20px;
+      box-shadow: 0 1px 4px rgba(0,0,0,.08);
+    }
+    .toolbar-brand { display: flex; align-items: center; gap: 8px; text-decoration: none; color: #111; }
+    .toolbar-brand .logo-icon { font-size: 18px; }
+    .toolbar-brand .logo-text { font-weight: 700; font-size: 1rem; font-family: 'Bricolage Grotesque', sans-serif; }
+    .toolbar-cta { display: flex; gap: 10px; align-items: center; }
+    .resume-name { font-weight: 600; font-size: 0.9rem; color: #6b7280; }
+    .resume-wrapper { max-width: 870px; margin: 0 auto; background: #fff; box-shadow: 0 4px 24px rgba(0,0,0,.12); border-radius: 2px; }
+    .not-found { max-width: 480px; margin: 80px auto; text-align: center; background: #fff; border-radius: 16px; padding: 48px; box-shadow: 0 4px 24px rgba(0,0,0,.08); }
+    .not-found h2 { font-size: 1.5rem; margin-bottom: 10px; }
+    .not-found p { color: #6b7280; margin-bottom: 24px; }
+  </style>
+</head>
+<body>
+
+  <div class="public-toolbar" id="toolbar">
+    <a href="index.html" class="toolbar-brand">
+      <span class="logo-icon">⚡</span>
+      <span class="logo-text">ResumeForge</span>
+    </a>
+    <span class="resume-name" id="resume-owner-name">Loading…</span>
+    <div class="toolbar-cta">
+      <button class="btn-secondary" id="btn-download-pdf" style="display:none">⬇ Download PDF</button>
+      <a href="index.html" class="btn-primary">Build Your Own →</a>
+    </div>
+  </div>
+
+  <div id="main-area">
+    <div class="resume-wrapper" id="resume-wrapper">
+      <div id="resume-preview" style="padding:0;min-height:297mm;"></div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <script src="js/config.js"></script>
+  <script src="js/templates.js"></script>
+  <script>
+    (async () => {
+      const params = new URLSearchParams(window.location.search);
+      const slug = params.get('slug');
+      const preview = document.getElementById('resume-preview');
+
+      if (!slug) {
+        showNotFound('No resume slug provided in URL.');
+        return;
+      }
+
+      const { data: resume, error } = await supabase
+        .from('resumes')
+        .select('*')
+        .eq('public_slug', slug)
+        .eq('is_public', true)
+        .single();
+
+      if (error || !resume) {
+        showNotFound('This resume does not exist or is not publicly shared.');
+        return;
+      }
+
+      const data = resume.data_json || {};
+      const name = data.personal?.fullName || resume.title || 'Resume';
+      document.title = `${name} — ResumeForge`;
+      document.getElementById('resume-owner-name').textContent = name;
+
+      preview.innerHTML = renderResume(data, resume.template || 'classic', {});
+
+      const dlBtn = document.getElementById('btn-download-pdf');
+      dlBtn.style.display = 'flex';
+      dlBtn.addEventListener('click', () => {
+        const opt = {
+          margin: 0,
+          filename: `${name.replace(/\s+/g, '-').toLowerCase()}-resume.pdf`,
+          image: { type: 'jpeg', quality: 0.98 },
+          html2canvas: { scale: 2 },
+          jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+        };
+        dlBtn.textContent = '⏳ Generating…';
+        dlBtn.disabled = true;
+        html2pdf().set(opt).from(preview).save().then(() => {
+          dlBtn.textContent = '⬇ Download PDF';
+          dlBtn.disabled = false;
+        });
+      });
+    })();
+
+    function showNotFound(msg) {
+      document.getElementById('resume-owner-name').textContent = 'Not Found';
+      document.getElementById('resume-wrapper').innerHTML = `
+        <div class="not-found">
+          <div style="font-size:3rem;margin-bottom:16px">🔍</div>
+          <h2>Resume Not Found</h2>
+          <p>${msg}</p>
+          <a href="index.html" class="btn-primary">Go to ResumeForge →</a>
+        </div>`;
+    }
+  </script>
+</body>
+</html>
