@@ -3,7 +3,7 @@
 // occupies window.supabase. Declaring 'const supabase' in global scope would
 // collide with that existing property and throw a SyntaxError.
 
-const SUPABASE_URL = 'https://svpzqfitcphmhqzansoe.db.co';
+const SUPABASE_URL = 'https://svpzqfitcphmhqzansoe.supabase.co';
 const SUPABASE_KEY = 'sb_publishable_r5c2naf1HqiCt_C2sK-cqw_MXYbo2bj';
 
 // window.supabase = the CDN library  →  db = our initialized client
