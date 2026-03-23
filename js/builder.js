@@ -12,6 +12,12 @@ document.addEventListener('DOMContentLoaded', async () => {
   const user = await requireAuth();
   if (!user) return;
 
+  // Populate sidebar user info
+  const userEmailEl = document.getElementById('user-email');
+  const userAvatarEl = document.getElementById('user-avatar');
+  if (userEmailEl) userEmailEl.textContent = user.email;
+  if (userAvatarEl) userAvatarEl.textContent = user.email[0].toUpperCase();
+
   const params = new URLSearchParams(window.location.search);
   resumeId = params.get('id');
   if (!resumeId) { window.location.href = 'dashboard.html'; return; }

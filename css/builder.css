@@ -155,19 +155,17 @@
   overflow-x: auto;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;  /* prevents left-side clip when content overflows */
   padding: 32px 0 16px;
   min-width: 0;
 }
 
-/* Transparent spacer that is always A4-wide.
-   The paper lives inside and transforms; this box never changes size. */
+/* Keep the scale container centered when it fits, push it right when it overflows */
 .preview-scale-container {
-  width: 210mm;     /* fixed — never set by JS */
-  flex-shrink: 0;
+  min-width: 100%;
   display: flex;
   justify-content: center;
-  /* JS adjusts marginBottom via wrapper — container itself stays rigid */
+  flex-shrink: 0;
 }
 
 /* The white A4 paper sheet.
