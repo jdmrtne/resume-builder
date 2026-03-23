@@ -420,20 +420,31 @@ var SAMPLE_DATA_BUILDER = {
 function setupTemplatePanel() {
   const grid = document.getElementById('template-grid');
   if (!grid) return;
+
   Object.entries(TEMPLATES).forEach(([key, tpl]) => {
     const div = document.createElement('div');
-    div.className = `template-thumb ${key === currentTemplate ? 'active' : ''}`;
+    div.className = `template-card-sm ${key === currentTemplate ? 'active' : ''}`;
     div.dataset.template = key;
 
-    // Render a live mini preview using current resume data or sample
     const previewData = (resumeData && resumeData.personal && resumeData.personal.fullName) ? resumeData : SAMPLE_DATA_BUILDER;
     const previewHtml = renderResume(previewData, key, {});
 
     div.innerHTML = `
-      <div class="tpl-mini-frame-sm">
-        <div class="tpl-mini-scaler-sm">${previewHtml}</div>
+      <div class="tpl-frame-sm">
+        <div class="tpl-scaler-sm">${previewHtml}</div>
+        <div class="tpl-card-sm-overlay">
+          <button class="tpl-sm-select-btn">Use</button>
+        </div>
       </div>
-      <span class="tpl-name">${tpl.name}</span>`;
+      <span class="tpl-sm-name">${tpl.name}</span>`;
+
+    div.querySelector('.tpl-sm-select-btn').addEventListener('click', (e) => {
+      e.stopPropagation();
+      currentTemplate = key;
+      highlightTemplate(key);
+      updatePreview();
+      saveResume(true);
+    });
     div.addEventListener('click', () => {
       currentTemplate = key;
       highlightTemplate(key);
@@ -445,7 +456,7 @@ function setupTemplatePanel() {
 }
 
 function highlightTemplate(key) {
-  document.querySelectorAll('.template-thumb').forEach(t => {
+  document.querySelectorAll('.template-card-sm').forEach(t => {
     t.classList.toggle('active', t.dataset.template === key);
   });
 }

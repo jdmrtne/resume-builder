@@ -136,10 +136,31 @@
     <div class="modal-box modal-wide">
       <div class="modal-header">
         <h2>Browse Templates</h2>
-        <p>Pick a template when creating or editing a resume</p>
+        <p>Click a template to start building — hover to preview</p>
         <button class="modal-close" onclick="closeTemplatesModal()">✕</button>
       </div>
-            <div class="tpl-modal-grid" id="tpl-modal-grid"></div>
+      <div class="tpl-modal-grid" id="tpl-modal-grid"></div>
+    </div>
+  </div>
+
+  <!-- ─── TEMPLATE PREVIEW MODAL ─────────────────────────────────────── -->
+  <div class="modal-overlay" id="preview-modal" onclick="if(event.target===this)closePreviewModal()">
+    <div class="modal-box modal-preview-box">
+      <div class="preview-modal-header">
+        <div>
+          <h2 id="preview-modal-title">Template Preview</h2>
+          <p id="preview-modal-desc">Sample resume with placeholder data</p>
+        </div>
+        <div class="preview-modal-actions">
+          <button class="btn-use-template" id="btn-use-template">Use This Template</button>
+          <button class="modal-close" onclick="closePreviewModal()">✕</button>
+        </div>
+      </div>
+      <div class="preview-modal-body">
+        <div class="preview-modal-resume" id="preview-modal-resume"></div>
+      </div>
+    </div>
+  </div>
 
   <!-- ─── ATS TIPS MODAL ──────────────────────────────────────────────── -->
   <div class="modal-overlay" id="ats-modal" onclick="if(event.target===this)closeATSModal()">
@@ -265,84 +286,78 @@
   </script>
 
   <script>
-  // ─── TEMPLATE MODAL WITH LIVE MINI PREVIEWS ──────────────────────────────
+  // ─── SAMPLE DATA & TEMPLATE GRID ─────────────────────────────────────────
   var SAMPLE_RESUME = {
     personal: {
-      fullName: 'Alex Morgan',
-      title: 'Senior Product Designer',
-      email: 'alex@email.com',
-      phone: '+1 (415) 555-0192',
-      location: 'San Francisco, CA',
-      linkedin: 'linkedin.com/in/alexmorgan',
+      fullName: 'Alex Morgan', title: 'Senior Product Designer',
+      email: 'alex@email.com', phone: '+1 (415) 555-0192',
+      location: 'San Francisco, CA', linkedin: 'linkedin.com/in/alexmorgan',
       portfolio: 'alexmorgan.design',
-      summary: 'Creative product designer with 8+ years building user-centered digital experiences for Fortune 500 companies. Led design systems adopted by 200+ engineers.'
+      summary: 'Creative product designer with 8+ years building user-centered digital experiences for Fortune 500 companies. Led design systems adopted by 200+ engineers across 12 product teams.'
     },
     experience: [
-      {
-        company: 'Stripe', position: 'Senior Product Designer',
-        startDate: 'Mar 2021', endDate: '', current: true,
-        bullets: [
-          'Led redesign of checkout flow, improving conversion by 34%',
-          'Built design system used across 12 product teams',
-          'Mentored 4 junior designers through weekly 1:1s'
-        ]
-      },
-      {
-        company: 'Airbnb', position: 'Product Designer',
-        startDate: 'Jun 2018', endDate: 'Feb 2021', current: false,
-        bullets: [
-          'Designed host onboarding experience, reducing drop-off by 28%',
-          'Collaborated with 6 engineers to ship mobile app redesign'
-        ]
-      }
+      { company: 'Stripe', position: 'Senior Product Designer', startDate: 'Mar 2021', endDate: '', current: true,
+        bullets: ['Led redesign of checkout flow, improving conversion by 34%', 'Built design system used across 12 product teams', 'Mentored 4 junior designers through weekly 1:1 coaching sessions'] },
+      { company: 'Airbnb', position: 'Product Designer', startDate: 'Jun 2018', endDate: 'Feb 2021', current: false,
+        bullets: ['Designed host onboarding experience, reducing drop-off by 28%', 'Collaborated with 6 engineers to ship mobile app redesign on schedule'] }
     ],
     education: [
-      { school: 'Carnegie Mellon University', degree: "Bachelor's", field: 'Human-Computer Interaction', startDate: 'Sep 2013', endDate: 'May 2017', honors: 'Cum Laude' }
+      { school: 'Carnegie Mellon University', degree: "Bachelor's", field: 'Human-Computer Interaction', startDate: 'Sep 2013', endDate: 'May 2017', honors: 'Cum Laude, 3.9 GPA' }
     ],
     skills: {
-      technical: ['Figma', 'Sketch', 'Prototyping', 'User Research', 'Wireframing'],
-      tools: ['Jira', 'Notion', 'Zeplin', 'Lottie', 'HTML/CSS'],
-      soft: ['Leadership', 'Communication', 'Stakeholder Management'],
+      technical: ['Figma', 'Sketch', 'Prototyping', 'User Research', 'Wireframing', 'Usability Testing'],
+      tools: ['Jira', 'Notion', 'Zeplin', 'HTML/CSS', 'Lottie'],
+      soft: ['Leadership', 'Communication', 'Stakeholder Management', 'Agile'],
       languages: ['English (Native)', 'French (Conversational)']
     },
     projects: [
-      { name: 'DesignOS', description: 'Open-source design token system', technologies: 'Figma, Storybook, CSS', link: 'github.com/alexmorgan/designos' }
+      { name: 'DesignOS', description: 'Open-source design token system used by 500+ designers globally.', technologies: 'Figma Tokens, Storybook, CSS Variables', link: 'github.com/alexmorgan/designos' }
     ],
     certifications: [
       { name: 'Google UX Design Certificate', issuer: 'Google', year: '2022' },
-      { name: 'Certified ScrumMaster', issuer: 'Scrum Alliance', year: '2021' }
+      { name: 'Certified ScrumMaster (CSM)', issuer: 'Scrum Alliance', year: '2021' }
     ]
   };
 
   var TEMPLATE_LIST = [
-    { key: 'classic',   name: 'Classic ATS',      desc: 'Single-column, max ATS score' },
-    { key: 'modern',    name: 'Modern Bold',       desc: 'Bold typography, clean dividers' },
-    { key: 'corporate', name: 'Corporate Blue',    desc: 'Navy header, structured sections' },
-    { key: 'creative',  name: 'Creative Sidebar',  desc: 'Two-column with colored sidebar' },
-    { key: 'swiss',     name: 'Swiss Minimal',     desc: 'Google-style subtle accent layout' },
-    { key: 'executive', name: 'Executive',         desc: 'Serif elegance, refined header' },
-    { key: 'tech',      name: 'Tech Developer',    desc: 'Terminal dark theme' },
-    { key: 'timeline',  name: 'Timeline',          desc: 'Vertical timeline structure' },
-    { key: 'twoColumn', name: 'Two-Column Pro',    desc: 'Skills sidebar, bold headers' },
-    { key: 'compact',   name: 'Compact One-Page',  desc: 'Dense, maximizes every inch' }
+    { key: 'classic',   name: 'Classic ATS',      desc: 'Single-column, max ATS compatibility' },
+    { key: 'modern',    name: 'Modern Bold',       desc: 'Bold typography, clean section dividers' },
+    { key: 'corporate', name: 'Corporate Blue',    desc: 'Navy header, structured & professional' },
+    { key: 'creative',  name: 'Creative Sidebar',  desc: 'Two-column with coloured sidebar' },
+    { key: 'swiss',     name: 'Swiss Minimal',     desc: 'Google-style horizontal layout' },
+    { key: 'executive', name: 'Executive',         desc: 'Serif elegance, refined double-rule header' },
+    { key: 'tech',      name: 'Tech Developer',    desc: 'Terminal dark header, code-inspired' },
+    { key: 'timeline',  name: 'Timeline',          desc: 'Vertical dot-and-line timeline structure' },
+    { key: 'twoColumn', name: 'Two-Column Pro',    desc: 'Skills sidebar with bold section headers' },
+    { key: 'compact',   name: 'Compact One-Page',  desc: 'Dense layout — maximizes every inch' }
   ];
+
+  var _pendingTemplateKey = null;
 
   function buildTemplateModal() {
     var grid = document.getElementById('tpl-modal-grid');
     if (!grid || typeof renderResume !== 'function') return;
     grid.innerHTML = '';
+
     TEMPLATE_LIST.forEach(function(tpl) {
       var card = document.createElement('div');
       card.className = 'tpl-modal-card';
-      card.onclick = function() { createNewResume(tpl.key); };
+      card.dataset.key = tpl.key;
 
-      // Render the actual mini resume
       var previewHtml = renderResume(SAMPLE_RESUME, tpl.key, {});
 
       card.innerHTML =
         '<div class="tpl-mini-frame">' +
-          '<div class="tpl-mini-scaler">' +
-            previewHtml +
+          '<div class="tpl-mini-scaler">' + previewHtml + '</div>' +
+          '<div class="tpl-card-overlay">' +
+            '<button class="tpl-overlay-btn primary" onclick="useTemplate('' + tpl.key + '');event.stopPropagation();">' +
+              '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px"><polyline points="20 6 9 17 4 12"/></svg>' +
+              'Use Template' +
+            '</button>' +
+            '<button class="tpl-overlay-btn secondary" onclick="previewTemplate('' + tpl.key + '');event.stopPropagation();">' +
+              '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>' +
+              'Preview' +
+            '</button>' +
           '</div>' +
         '</div>' +
         '<div class="tpl-modal-info">' +
@@ -354,16 +369,60 @@
     });
   }
 
+  function useTemplate(key) {
+    createNewResume(key);
+  }
+
+  function previewTemplate(key) {
+    var tpl = TEMPLATE_LIST.find(function(t){ return t.key === key; });
+    if (!tpl || typeof renderResume !== 'function') return;
+
+    _pendingTemplateKey = key;
+    document.getElementById('preview-modal-title').textContent = tpl.name;
+    document.getElementById('preview-modal-desc').textContent = tpl.desc;
+
+    // Render full-size resume
+    var resumeEl = document.getElementById('preview-modal-resume');
+    resumeEl.innerHTML = renderResume(SAMPLE_RESUME, key, {});
+
+    // Scale to fit the modal body
+    var modal = document.getElementById('preview-modal');
+    modal.classList.add('open');
+
+    // Scale the preview to fit width
+    setTimeout(function() {
+      var body = document.querySelector('.preview-modal-body');
+      var el   = document.querySelector('.preview-modal-resume');
+      if (!body || !el) return;
+      var avail = body.clientWidth - 48;
+      var scale = Math.min(1, avail / 794);
+      el.style.transform = 'scale(' + scale + ')';
+      el.style.transformOrigin = 'top center';
+      el.style.marginBottom = ((1123 * scale) - 1123) + 'px';
+    }, 50);
+
+    // Wire up the "Use Template" button
+    document.getElementById('btn-use-template').onclick = function() {
+      createNewResume(_pendingTemplateKey);
+    };
+  }
+
+  function closePreviewModal() {
+    document.getElementById('preview-modal').classList.remove('open');
+  }
+
   // Build when modal opens
-  var _origOpenTemplates = window.openTemplatesModal;
   window.openTemplatesModal = function() {
     document.getElementById('templates-modal').classList.add('open');
-    buildTemplateModal();
+    setTimeout(buildTemplateModal, 10);
   };
 
-  // Also build on DOMContentLoaded in case modal is already open
-  document.addEventListener('DOMContentLoaded', function() {
-    if (typeof renderResume === 'function') buildTemplateModal();
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+      closePreviewModal();
+      closeTemplatesModal();
+      closeATSModal();
+    }
   });
   </script>
 </body>
