@@ -408,6 +408,15 @@ function bindCardEvents(card, inputClass, labelClass) {
 }
 
 // ─── TEMPLATE PANEL ───────────────────────────────────────────────────────
+var SAMPLE_DATA_BUILDER = {
+  personal: { fullName: 'Alex Morgan', title: 'Senior Product Designer', email: 'alex@email.com', phone: '+1 (415) 555-0192', location: 'San Francisco, CA', linkedin: 'linkedin.com/in/alexmorgan', portfolio: 'alexmorgan.design', summary: 'Creative product designer with 8+ years building user-centered digital experiences. Led design systems adopted by 200+ engineers.' },
+  experience: [{ company: 'Stripe', position: 'Senior Product Designer', startDate: 'Mar 2021', endDate: '', current: true, bullets: ['Led redesign of checkout flow, improving conversion by 34%', 'Built design system used across 12 product teams'] }, { company: 'Airbnb', position: 'Product Designer', startDate: 'Jun 2018', endDate: 'Feb 2021', current: false, bullets: ['Designed host onboarding, reducing drop-off by 28%'] }],
+  education: [{ school: 'Carnegie Mellon University', degree: "Bachelor's", field: 'HCI', startDate: 'Sep 2013', endDate: 'May 2017', honors: 'Cum Laude' }],
+  skills: { technical: ['Figma', 'Prototyping', 'User Research', 'Wireframing'], tools: ['Jira', 'Zeplin', 'HTML/CSS', 'Notion'], soft: ['Leadership', 'Communication'], languages: ['English (Native)', 'French (Conversational)'] },
+  projects: [{ name: 'DesignOS', description: 'Open-source design token system', technologies: 'Figma, Storybook, CSS', link: 'github.com/alexmorgan/designos' }],
+  certifications: [{ name: 'Google UX Design Certificate', issuer: 'Google', year: '2022' }]
+};
+
 function setupTemplatePanel() {
   const grid = document.getElementById('template-grid');
   if (!grid) return;
@@ -415,10 +424,14 @@ function setupTemplatePanel() {
     const div = document.createElement('div');
     div.className = `template-thumb ${key === currentTemplate ? 'active' : ''}`;
     div.dataset.template = key;
+
+    // Render a live mini preview using current resume data or sample
+    const previewData = (resumeData && resumeData.personal && resumeData.personal.fullName) ? resumeData : SAMPLE_DATA_BUILDER;
+    const previewHtml = renderResume(previewData, key, {});
+
     div.innerHTML = `
-      <div class="tpl-mini-preview tpl-mini-${key}">
-        <div class="tpl-mini-header"></div>
-        <div class="tpl-mini-lines"><div></div><div></div><div></div></div>
+      <div class="tpl-mini-frame-sm">
+        <div class="tpl-mini-scaler-sm">${previewHtml}</div>
       </div>
       <span class="tpl-name">${tpl.name}</span>`;
     div.addEventListener('click', () => {

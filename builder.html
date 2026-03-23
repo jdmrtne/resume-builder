@@ -51,20 +51,6 @@
       <input type="text" id="resume-title-input" class="topbar-title-input" placeholder="Untitled Resume" />
       <div class="topbar-spacer"></div>
 
-      <!-- Zoom Slider (MS Office style) -->
-      <div class="zoom-control" id="zoom-control">
-        <button class="zoom-btn" id="zoom-out" title="Zoom Out">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" style="width:12px;height:12px"><line x1="5" y1="12" x2="19" y2="12"/></svg>
-        </button>
-        <div class="zoom-slider-track">
-          <input type="range" id="zoom-slider" min="40" max="100" value="70" step="5" title="Zoom level" />
-        </div>
-        <button class="zoom-btn" id="zoom-in" title="Zoom In">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" style="width:12px;height:12px"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-        </button>
-        <span class="zoom-label" id="zoom-label">70%</span>
-      </div>
-
       <div class="topbar-actions">
         <button id="btn-save">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
@@ -205,11 +191,31 @@
       </div>
 
       <!-- ─── CENTER PANEL: LIVE PREVIEW ───────────────────────────────── -->
-      <div class="builder-center">
-        <div class="preview-scale-container" id="preview-scale-container">
-          <div class="preview-wrapper" id="preview-wrapper">
-            <div id="resume-preview"></div>
+      <div class="builder-center" id="builder-center">
+        <!-- Scrollable preview area -->
+        <div class="preview-scroll-area" id="preview-scroll-area">
+          <div class="preview-scale-container" id="preview-scale-container">
+            <div class="preview-wrapper" id="preview-wrapper">
+              <div id="resume-preview"></div>
+            </div>
           </div>
+        </div>
+        <!-- Floating zoom bar at bottom of preview -->
+        <div class="preview-zoom-bar">
+          <button class="zoom-btn" id="zoom-out" title="Zoom Out">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" style="width:13px;height:13px"><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </button>
+          <div class="zoom-slider-track">
+            <input type="range" id="zoom-slider" min="40" max="100" value="70" step="5" />
+          </div>
+          <button class="zoom-btn" id="zoom-in" title="Zoom In">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" style="width:13px;height:13px"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </button>
+          <span class="zoom-label" id="zoom-label">70%</span>
+          <div class="zoom-divider"></div>
+          <button class="zoom-fit-btn" id="zoom-fit" title="Fit to window">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:13px;height:13px"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/></svg>
+          </button>
         </div>
       </div>
 
@@ -395,65 +401,37 @@
   })();
   </script>
 
-  <script>
-  // ─── DYNAMIC PREVIEW SCALING ─────────────────────────────────────────────
-  function fitPreview() {
-    var center = document.querySelector('.builder-center');
-    var container = document.getElementById('preview-scale-container');
-    var wrapper = document.getElementById('preview-wrapper');
-    if (!center || !container || !wrapper) return;
 
-    var A4_W_PX = 794; // 210mm at 96dpi
-    var A4_H_PX = 1123; // 297mm at 96dpi
-    var padding = 48; // 24px each side
-    var availW = center.clientWidth - padding;
-
-    var scale = Math.min(1, availW / A4_W_PX);
-    scale = Math.max(0.3, scale); // floor at 30%
-
-    // Set CSS variable on both elements
-    container.style.setProperty('--preview-scale', scale);
-    wrapper.style.setProperty('--preview-scale', scale);
-
-    // Size the outer container to match scaled dimensions
-    container.style.width  = (A4_W_PX * scale) + 'px';
-    container.style.minHeight = (A4_H_PX * scale) + 'px';
-  }
-
-  window.addEventListener('load', fitPreview);
-  window.addEventListener('resize', fitPreview);
-
-  // Also refit whenever sidebar expands/collapses
-  var _origExpand = window._sidebarExpand;
-  document.addEventListener('DOMContentLoaded', function() {
-    var sb = document.querySelector('.sidebar');
-    if (sb) {
-      sb.addEventListener('mouseenter', function(){ setTimeout(fitPreview, 260); });
-      sb.addEventListener('mouseleave', function(){ setTimeout(fitPreview, 260); });
-    }
-    fitPreview();
-  });
-  </script>
 
   <script>
   // ─── ZOOM SLIDER LOGIC ────────────────────────────────────────────────────
   (function() {
-    var slider   = document.getElementById('zoom-slider');
-    var zoomOut  = document.getElementById('zoom-out');
-    var zoomIn   = document.getElementById('zoom-in');
-    var label    = document.getElementById('zoom-label');
+    var slider    = document.getElementById('zoom-slider');
+    var zoomOut   = document.getElementById('zoom-out');
+    var zoomIn    = document.getElementById('zoom-in');
+    var zoomFit   = document.getElementById('zoom-fit');
+    var label     = document.getElementById('zoom-label');
     var container = document.getElementById('preview-scale-container');
     var wrapper   = document.getElementById('preview-wrapper');
+    var scrollArea = document.getElementById('preview-scroll-area');
+    var A4W = 794, A4H = 1123;
+
+    function calcFitScale() {
+      var area = scrollArea || document.querySelector('.builder-center');
+      if (!area) return 0.7;
+      var avail = area.clientWidth - 48; // 24px padding each side
+      var s = Math.min(1, avail / A4W);
+      return Math.max(0.35, Math.round(s * 20) / 20); // round to nearest 0.05
+    }
 
     function applyZoom(val) {
       val = Math.max(40, Math.min(100, val));
-      slider.value = val;
-      label.textContent = val + '%';
+      if (slider) slider.value = val;
+      if (label) label.textContent = val + '%';
       var scale = val / 100;
-      var A4W = 794, A4H = 1123;
       if (container) {
         container.style.setProperty('--preview-scale', scale);
-        container.style.width  = (A4W * scale) + 'px';
+        container.style.width     = (A4W * scale) + 'px';
         container.style.minHeight = (A4H * scale) + 'px';
       }
       if (wrapper) {
@@ -462,31 +440,26 @@
       }
     }
 
-    if (slider) {
-      slider.addEventListener('input', function() { applyZoom(parseInt(this.value)); });
-    }
-    if (zoomOut) {
-      zoomOut.addEventListener('click', function() { applyZoom(parseInt(slider.value) - 5); });
-    }
-    if (zoomIn) {
-      zoomIn.addEventListener('click', function() { applyZoom(parseInt(slider.value) + 5); });
+    // Initial fit
+    function fitToWindow() {
+      var s = calcFitScale();
+      applyZoom(Math.round(s * 100));
     }
 
-    // Override the fitPreview auto-scale to only set initial value, not fight with slider
-    var _fitDone = false;
-    var _origFit = window.fitPreview;
-    window.fitPreview = function() {
-      if (_fitDone) return; // after first fit, slider takes over
-      _fitDone = true;
-      var center = document.querySelector('.builder-center');
-      if (!center) return;
-      var A4W = 794, padding = 48;
-      var availW = center.clientWidth - padding;
-      var autoScale = Math.min(1, availW / A4W);
-      var pct = Math.round(autoScale * 100 / 5) * 5; // round to nearest 5
-      pct = Math.max(40, Math.min(100, pct));
-      applyZoom(pct);
-    };
+    if (slider)  slider.addEventListener('input', function() { applyZoom(parseInt(this.value)); });
+    if (zoomOut) zoomOut.addEventListener('click', function() { applyZoom(parseInt(slider.value) - 5); });
+    if (zoomIn)  zoomIn.addEventListener('click',  function() { applyZoom(parseInt(slider.value) + 5); });
+    if (zoomFit) zoomFit.addEventListener('click',  fitToWindow);
+
+    // Override fitPreview for initial load
+    window.fitPreview = fitToWindow;
+
+    document.addEventListener('DOMContentLoaded', function() {
+      setTimeout(fitToWindow, 100);
+    });
+    window.addEventListener('resize', function() {
+      // Only auto-refit if at a "fit" level (don't fight manual zoom)
+    });
   })();
   </script>
 </body>
