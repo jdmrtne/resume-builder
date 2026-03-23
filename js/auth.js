@@ -2,7 +2,7 @@
 
 document.addEventListener('DOMContentLoaded', async () => {
   // If already logged in, go to dashboard
-  const { data: { session } } = await supabase.auth.getSession();
+  const { data: { session } } = await db.auth.getSession();
   if (session) window.location.href = 'dashboard.html';
 
   // Tab switching
@@ -76,7 +76,7 @@ async function handleLogin() {
   btn.disabled = true;
   btn.textContent = 'Signing in…';
 
-  const { error } = await supabase.auth.signInWithPassword({ email, password });
+  const { error } = await db.auth.signInWithPassword({ email, password });
   btn.disabled = false;
   btn.textContent = 'Sign In';
 
@@ -98,7 +98,7 @@ async function handleSignup() {
   btn.disabled = true;
   btn.textContent = 'Creating account…';
 
-  const { error } = await supabase.auth.signUp({ email, password });
+  const { error } = await db.auth.signUp({ email, password });
   btn.disabled = false;
   btn.textContent = 'Create Account';
 
@@ -116,7 +116,7 @@ async function handleForgot() {
   btn.disabled = true;
   btn.textContent = 'Sending…';
 
-  const { error } = await supabase.auth.resetPasswordForEmail(email, {
+  const { error } = await db.auth.resetPasswordForEmail(email, {
     redirectTo: window.location.origin + '/resume-builder/index.html'
   });
   btn.disabled = false;

@@ -60,7 +60,7 @@
         return;
       }
 
-      const { data: resume, error } = await supabase
+      const { data: resume, error } = await db
         .from('resumes')
         .select('*')
         .eq('public_slug', slug)

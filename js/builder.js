@@ -26,14 +26,14 @@ document.addEventListener('DOMContentLoaded', async () => {
   populateForm();
   updatePreview();
   document.getElementById('btn-logout').addEventListener('click', async () => {
-    await supabase.auth.signOut();
+    await db.auth.signOut();
     window.location.href = 'index.html';
   });
 });
 
 // ─── LOAD / SAVE ──────────────────────────────────────────────────────────
 async function loadResume() {
-  const { data, error } = await supabase.from('resumes').select('*').eq('id', resumeId).single();
+  const { data, error } = await db.from('resumes').select('*').eq('id', resumeId).single();
   if (error || !data) { alert('Resume not found'); window.location.href = 'dashboard.html'; return; }
   resumeData = data.data_json || getDefaultData();
   currentTemplate = data.template || 'classic';
@@ -47,7 +47,7 @@ async function saveResume(silent = false) {
   collectFormData();
   const title = document.getElementById('resume-title-input').value.trim() || 'Untitled Resume';
   window.currentResumeTitle = title;
-  const { error } = await supabase.from('resumes').update({
+  const { error } = await db.from('resumes').update({
     title, data_json: resumeData, template: currentTemplate, updated_at: new Date().toISOString()
   }).eq('id', resumeId);
   if (!silent) {
@@ -501,11 +501,11 @@ async function publishResume() {
   btn.disabled = true; btn.textContent = '⏳ Publishing…';
   await saveResume(true);
 
-  const { data: resume } = await supabase.from('resumes').select('is_public, public_slug').eq('id', resumeId).single();
+  const { data: resume } = await db.from('resumes').select('is_public, public_slug').eq('id', resumeId).single();
   const slug = resume.public_slug || Math.random().toString(36).slice(2,10);
   const newPublic = !resume.is_public;
 
-  await supabase.from('resumes').update({ is_public: newPublic, public_slug: slug }).eq('id', resumeId);
+  await db.from('resumes').update({ is_public: newPublic, public_slug: slug }).eq('id', resumeId);
 
   btn.disabled = false;
   if (newPublic) {

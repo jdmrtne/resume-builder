@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   loadResumes();
 
   document.getElementById('btn-logout').addEventListener('click', async () => {
-    await supabase.auth.signOut();
+    await db.auth.signOut();
     window.location.href = 'index.html';
   });
 
@@ -121,7 +121,7 @@ async function createNewResume() {
     certifications: []
   };
 
-  const { data, error } = await supabase.from('resumes').insert({
+  const { data, error } = await db.from('resumes').insert({
     user_id: currentUser.id,
     title: 'New Resume',
     data_json: defaultData,
@@ -138,10 +138,10 @@ function editResume(id) {
 }
 
 async function duplicateResume(id) {
-  const { data: original } = await supabase.from('resumes').select('*').eq('id', id).single();
+  const { data: original } = await db.from('resumes').select('*').eq('id', id).single();
   if (!original) return;
 
-  const { error } = await supabase.from('resumes').insert({
+  const { error } = await db.from('resumes').insert({
     user_id: currentUser.id,
     title: original.title + ' (Copy)',
     data_json: original.data_json,
@@ -156,17 +156,17 @@ async function duplicateResume(id) {
 async function deleteResume(id, cardEl) {
   if (!confirm('Delete this resume? This cannot be undone.')) return;
   cardEl.style.opacity = '0.4';
-  const { error } = await supabase.from('resumes').delete().eq('id', id);
+  const { error } = await db.from('resumes').delete().eq('id', id);
   if (error) { alert('Error deleting: ' + error.message); cardEl.style.opacity = '1'; return; }
   loadResumes();
 }
 
 async function togglePublic(id, btn) {
-  const { data: resume } = await supabase.from('resumes').select('is_public, public_slug').eq('id', id).single();
+  const { data: resume } = await db.from('resumes').select('is_public, public_slug').eq('id', id).single();
   const newPublic = !resume.is_public;
   const slug = resume.public_slug || generateSlug();
 
-  const { error } = await supabase.from('resumes').update({
+  const { error } = await db.from('resumes').update({
     is_public: newPublic,
     public_slug: newPublic ? slug : resume.public_slug
   }).eq('id', id);

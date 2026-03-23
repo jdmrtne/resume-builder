@@ -1,9 +1,15 @@
+// ─── SUPABASE CLIENT ───────────────────────────────────────────────────────
+// We intentionally use 'db' (not 'supabase') because the Supabase CDN already
+// occupies window.supabase. Declaring 'const supabase' in global scope would
+// collide with that existing property and throw a SyntaxError.
+
 const SUPABASE_URL = 'https://svpzqfitcphmhqzansoe.supabase.co';
 const SUPABASE_KEY = 'sb_publishable_r5c2naf1HqiCt_C2sK-cqw_MXYbo2bj';
 
-// Alias the CDN lib to avoid naming collision with our client variable
-const _supabaseLib = window.supabase;
-const supabase = _supabaseLib.createClient(SUPABASE_URL, SUPABASE_KEY);
+// window.supabase = the CDN library  →  db = our initialized client
+const db = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+// ─── HELPERS ───────────────────────────────────────────────────────────────
 
 function uid() {
   return crypto.randomUUID ? crypto.randomUUID() : Math.random().toString(36).slice(2);
@@ -16,7 +22,7 @@ function formatDate(date) {
 }
 
 async function getUser() {
-  const { data: { user } } = await supabase.auth.getUser();
+  const { data: { user } } = await db.auth.getUser();
   return user;
 }
 
