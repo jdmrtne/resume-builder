@@ -382,3 +382,14 @@ body.sidebar-expanded .builder-body {
   font-family: var(--font-body);
 }
 #btn-save:hover { background: var(--primary-dark); }
+
+/* ─── SECTION NAV SVG ICONS ──────────────────────────────────────────────── */
+.nav-section-btn {
+  display: flex; align-items: center; gap: 9px;
+}
+.sec-icon {
+  width: 16px; height: 16px; flex-shrink: 0;
+  stroke: currentColor; transition: stroke 0.15s;
+}
+.nav-section-btn.active .sec-icon { stroke: var(--primary); }
+.nav-section-btn:hover .sec-icon { stroke: var(--primary); }

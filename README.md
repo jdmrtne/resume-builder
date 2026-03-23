@@ -1,61 +1,19 @@
+<div align="center">
+  <img src="assets/banner.svg" alt="ResumeForge Banner" width="100%" />
+  <br/><br/>
+
+  ![GitHub Pages](https://img.shields.io/badge/Deploy-GitHub%20Pages-4f46e5?style=flat-square&logo=github)
+  ![Supabase](https://img.shields.io/badge/Backend-Supabase-3ecf8e?style=flat-square&logo=supabase)
+  ![License](https://img.shields.io/badge/License-MIT-f97316?style=flat-square)
+  ![Vanilla JS](https://img.shields.io/badge/Built%20With-Vanilla%20JS-f59e0b?style=flat-square&logo=javascript)
+  ![No Framework](https://img.shields.io/badge/Framework-None-64748b?style=flat-square)
+</div>
+
+---
+
 # ⚡ ResumeForge
 
-A full-featured resume builder with AI bullet generator, ATS analyzer, keyword matching, 10 templates, and public resume hosting.
-
----
-
-## 🚀 Quick Setup (5 minutes)
-
-### Step 1 — Set up Supabase Database
-
-1. Go to your Supabase Dashboard → **SQL Editor**
-2. Click **New Query**
-3. Paste the entire contents of `supabase-setup.sql`
-4. Click **Run**
-
-This creates the `resumes` and `users` tables with Row Level Security policies.
-
-### Step 2 — Enable Email Auth
-
-1. Supabase Dashboard → **Authentication → Providers**
-2. Make sure **Email** is enabled
-3. Optionally disable "Confirm email" for easier testing (Auth → Settings → Disable email confirmations)
-
-### Step 3 — Deploy to GitHub Pages
-
-1. Push this entire `resume-builder/` folder to a GitHub repository
-2. Go to repository **Settings → Pages**
-3. Set source to `main` branch, `/ (root)` folder
-4. Your app will be live at `https://yourusername.github.io/your-repo/`
-
-Or simply open `index.html` directly in a browser for local testing.
-
----
-
-## 📁 File Structure
-
-```
-resume-builder/
-├── index.html          # Login / Sign up page
-├── dashboard.html      # Resume management dashboard
-├── builder.html        # Resume editor (main app)
-├── resume.html         # Public resume viewer
-├── supabase-setup.sql  # Database setup script
-├── css/
-│   ├── main.css        # Global styles, auth, dashboard
-│   ├── builder.css     # Builder layout & tool panels
-│   └── templates.css   # All 10 resume template styles
-└── js/
-    ├── config.js        # Supabase client setup
-    ├── auth.js          # Login / signup / forgot password
-    ├── dashboard.js     # Dashboard logic
-    ├── builder.js       # Main builder logic
-    ├── templates.js     # All 10 resume renderers
-    ├── ats-checker.js   # ATS score analyzer
-    ├── keyword-checker.js  # Job description keyword matcher
-    ├── ai-generator.js  # Mock AI bullet generator
-    └── export.js        # PDF, print, plain text export
-```
+> **AI-powered resume builder** — 10 professional templates, real-time ATS scoring, job description keyword matching, AI bullet generator, and one-click public resume hosting. Deployable on GitHub Pages with Supabase as the backend.
 
 ---
 
@@ -63,93 +21,154 @@ resume-builder/
 
 | Feature | Description |
 |---|---|
-| **10 Templates** | Classic ATS, Modern, Corporate, Creative, Graduate, Executive, Tech, Marketing, Designer, Compact |
-| **Live Preview** | See your resume update in real-time as you type |
-| **AI Bullet Generator** | Generate strong resume bullets by role and task |
-| **ATS Analyzer** | Score your resume 0-100 with specific improvement tips |
-| **Keyword Matcher** | Paste a job description and see matched/missing keywords |
-| **PDF Export** | High-quality PDF via html2pdf.js |
-| **Plain Text Export** | ATS-friendly `.txt` version |
-| **Public Resume Link** | One-click publish + shareable URL |
-| **Auto-save** | Changes saved automatically every 1.5 seconds |
-| **Template Customization** | 12 accent colors + custom color picker + font options |
+| **10 Professional Templates** | Classic ATS, Modern Bold, Corporate Blue, Creative Sidebar, Swiss Minimal, Executive, Tech Developer, Timeline, Two-Column Pro, Compact One-Page |
+| **Live Preview** | A4 resume updates in real-time as you type, with zoom slider (40–100%) |
+| **ATS Analyzer** | 0–100 score with specific improvement suggestions |
+| **Keyword Matcher** | Paste any job description — instantly see matched/missing keywords |
+| **✨ AI Bullet Generator** | Role-aware bullet generation — specify job + task, get 3–5 polished bullets |
+| **PDF Export** | High-quality A4 PDF via html2pdf.js |
+| **Plain Text Export** | ATS-safe `.txt` version for legacy applicant systems |
+| **🌐 Public Resume Link** | One-click publish with a shareable `?slug=` URL |
+| **Template Customization** | 12 accent color presets + color picker + 8 fonts + size slider |
+| **Auto-save** | Syncs to Supabase every 1.5 seconds automatically |
+| **Authentication** | Email/password sign up, sign in, forgot password via Supabase |
 
 ---
 
-## 🗄 Database Schema
+## 🚀 Quick Start (5 minutes)
 
-### `resumes` table
-| Column | Type | Description |
-|---|---|---|
-| `id` | UUID | Primary key |
-| `user_id` | UUID | References auth.users |
-| `title` | TEXT | Resume display name |
-| `data_json` | JSONB | All resume content |
-| `template` | TEXT | Selected template key |
-| `is_public` | BOOLEAN | Published online? |
-| `public_slug` | TEXT | URL slug for public link |
-| `created_at` | TIMESTAMPTZ | Creation timestamp |
-| `updated_at` | TIMESTAMPTZ | Last save timestamp |
+### 1. Set up the database
 
-### `data_json` Structure
-```json
-{
-  "personal": {
-    "fullName": "", "title": "", "email": "",
-    "phone": "", "location": "", "linkedin": "",
-    "portfolio": "", "summary": ""
-  },
-  "experience": [{
-    "company": "", "position": "",
-    "startDate": "", "endDate": "", "current": false,
-    "bullets": []
-  }],
-  "education": [{
-    "school": "", "degree": "", "field": "",
-    "startDate": "", "endDate": "", "honors": ""
-  }],
-  "skills": {
-    "technical": [], "soft": [], "tools": [], "languages": []
-  },
-  "projects": [{
-    "name": "", "description": "", "technologies": "", "link": ""
-  }],
-  "certifications": [{
-    "name": "", "issuer": "", "year": ""
-  }]
-}
+1. Create a free project at [supabase.com](https://supabase.com)
+2. Go to **SQL Editor → New Query**
+3. Paste the contents of `supabase-setup.sql` and click **Run**
+4. Confirm **Authentication → Providers → Email** is enabled
+
+### 2. Add your credentials
+
+Edit `js/config.js`:
+
+```js
+const SUPABASE_URL = 'https://your-project.supabase.co';
+const SUPABASE_KEY = 'your-anon-public-key';
+```
+
+### 3. Deploy
+
+```bash
+# GitHub Pages
+git clone https://github.com/yourusername/resume-builder
+# Push to GitHub → Settings → Pages → main branch / root → Save
+
+# Local development
+npx serve .
+# or
+python3 -m http.server 8080
+```
+
+---
+
+## 📁 Project Structure
+
+```
+resume-builder/
+├── index.html              # Login / Sign up / Forgot password
+├── dashboard.html          # Resume management dashboard
+├── builder.html            # Main resume editor (3-panel layout)
+├── resume.html             # Public shareable resume viewer
+├── supabase-setup.sql      # ← Run this first in Supabase SQL Editor
+│
+├── css/
+│   ├── main.css            # Global styles, auth page, dashboard layout
+│   ├── builder.css         # Builder layout, form cards, zoom slider
+│   ├── templates.css       # All 10 resume template styles
+│   └── dashboard-extra.css # Sidebar icons, modal overlays, action cards
+│
+├── js/
+│   ├── config.js           # Supabase client initialization
+│   ├── auth.js             # Login / signup / password reset
+│   ├── dashboard.js        # Resume grid, CRUD, publish/unpublish
+│   ├── builder.js          # Builder logic, form ↔ state ↔ preview
+│   ├── templates.js        # All 10 resume renderers (pure JS)
+│   ├── ats-checker.js      # ATS scoring algorithm
+│   ├── keyword-checker.js  # Job description keyword matcher
+│   ├── ai-generator.js     # Mock AI bullet point generator
+│   └── export.js           # PDF, print, plain text export
+│
+└── assets/
+    ├── icons.svg           # SVG icon sprite (30+ icons)
+    └── banner.svg          # GitHub repo banner
 ```
 
 ---
 
 ## 🎨 The 10 Templates
 
-1. **Classic ATS** — Traditional, ATS-optimized layout with center header
-2. **Modern Minimal** — Clean lines, left-accented bullets, skills grid
-3. **Corporate** — Dark navy header, structured sections, pill skills
-4. **Creative** — Two-column with colored sidebar and avatar initials
-5. **Graduate** — Academic serif style, education-first layout
-6. **Executive** — Elegant serif, double rule header, luxury feel
-7. **Tech Developer** — Terminal-themed dark header, code-inspired
-8. **Marketing Pro** — Bold typography, colored skills badges
-9. **Designer Portfolio** — Grid layout with colored sidebar
-10. **Compact One-Page** — Dense layout, maximizes content in one page
+| # | Template | Best For |
+|---|---|---|
+| 1 | **Classic ATS** | Maximum ATS compatibility, traditional roles |
+| 2 | **Modern Bold** | Tech, product, startup roles |
+| 3 | **Corporate Blue** | Finance, consulting, enterprise |
+| 4 | **Creative Sidebar** | Design, marketing, creative fields |
+| 5 | **Swiss Minimal** | Academic, research, clean aesthetic |
+| 6 | **Executive** | Senior, director, C-suite roles |
+| 7 | **Tech Developer** | Software engineers, DevOps, data |
+| 8 | **Timeline** | Recent grads, career changers |
+| 9 | **Two-Column Pro** | General professional use |
+| 10 | **Compact One-Page** | Experienced professionals with lots to say |
 
 ---
 
-## 🔧 Customization
+## 🗄 Database Schema
 
-Each template supports:
-- **12 preset accent colors** + custom color picker
-- **8 font family options** (serif, sans-serif, monospace)
-- **Font size control** (9–13pt)
+### `resumes` table
+
+| Column | Type | Notes |
+|---|---|---|
+| `id` | `uuid` | Auto-generated PK |
+| `user_id` | `uuid` | FK → `auth.users` |
+| `title` | `text` | Display name |
+| `data_json` | `jsonb` | All resume content |
+| `template` | `text` | Template key |
+| `is_public` | `boolean` | Published status |
+| `public_slug` | `text` | Shareable URL slug |
+| `created_at` | `timestamptz` | Creation time |
+| `updated_at` | `timestamptz` | Auto-updated on save |
 
 ---
 
-## 📤 Public Resume Hosting
+## 🛡 Security
 
-When you publish a resume:
-- A unique 8-character slug is generated
-- Public URL: `your-site.com/resume.html?slug=abc12345`
-- Anyone with the link can view and download your resume as PDF
-- Toggle public/private from the dashboard at any time
+- Row Level Security (RLS) enabled — users only access their own data
+- Public resumes: SELECT-only, filtered by `is_public = true`
+- Supabase anon key is safe to expose (publishable by design)
+
+---
+
+## 🧩 Dependencies (CDN, no npm needed)
+
+| Library | Purpose |
+|---|---|
+| `@supabase/supabase-js@2` | Auth + database |
+| `html2pdf.js@0.10.1` | PDF export |
+
+No build step. No bundler. No framework. Pure HTML + CSS + JS.
+
+---
+
+## 🤝 Contributing
+
+1. Fork → feature branch → PR
+2. Ideas: new templates, real AI integration (Anthropic API), i18n, cover letter builder
+
+---
+
+## 📄 License
+
+MIT — free to use, modify, and distribute.
+
+---
+
+<div align="center">
+  <strong>Built with ⚡ — zero dependencies, maximum features.</strong>
+</div>
