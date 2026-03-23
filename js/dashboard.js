@@ -24,7 +24,7 @@ async function loadResumes() {
   const grid = document.getElementById('resume-grid');
   grid.innerHTML = '<div class="loading-spinner"><span></span> Loading resumes…</div>';
 
-  const { data: resumes, error } = await supabase
+  const { data: resumes, error } = await db
     .from('resumes')
     .select('*')
     .eq('user_id', currentUser.id)
