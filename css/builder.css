@@ -140,11 +140,20 @@
 
 /* ─── CENTER PANEL (PREVIEW) ──────────────────────────────────────────────── */
 .builder-center {
-  background: #cbd5e1; overflow-y: auto; display: flex;
-  flex-direction: column; align-items: center; padding: 24px;
+  background: #cbd5e1; overflow-y: auto; overflow-x: hidden;
+  display: flex; flex-direction: column; align-items: center; padding: 24px;
+}
+.preview-scale-container {
+  --preview-scale: 0.7;
+  width: calc(210mm * var(--preview-scale));
+  min-height: calc(297mm * var(--preview-scale));
+  margin-bottom: 8px;
 }
 .preview-wrapper {
-  background: #fff; width: 210mm; min-height: 297mm; box-shadow: var(--shadow-md);
+  background: #fff; width: 210mm; min-height: 297mm;
+  box-shadow: 0 4px 24px rgba(0,0,0,.18);
+  transform-origin: top left;
+  transform: scale(var(--preview-scale, 0.7));
   position: relative;
 }
 #resume-preview { width: 100%; min-height: 297mm; }

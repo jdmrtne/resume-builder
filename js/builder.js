@@ -544,6 +544,8 @@ function updatePreview() {
   const preview = document.getElementById('resume-preview');
   if (!preview) return;
   preview.innerHTML = renderResume(resumeData, currentTemplate, customization);
+  // Refit scale after content may have changed height
+  if (typeof fitPreview === 'function') setTimeout(fitPreview, 50);
 }
 
 // ─── UTILS ────────────────────────────────────────────────────────────────

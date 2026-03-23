@@ -165,8 +165,10 @@
 
       <!-- ─── CENTER PANEL: LIVE PREVIEW ───────────────────────────────── -->
       <div class="builder-center">
-        <div class="preview-wrapper">
-          <div id="resume-preview"></div>
+        <div class="preview-scale-container" id="preview-scale-container">
+          <div class="preview-wrapper" id="preview-wrapper">
+            <div id="resume-preview"></div>
+          </div>
         </div>
       </div>
 
@@ -350,6 +352,46 @@
     sb.addEventListener("mouseenter", expand);
     sb.addEventListener("mouseleave", collapse);
   })();
+  </script>
+
+  <script>
+  // ─── DYNAMIC PREVIEW SCALING ─────────────────────────────────────────────
+  function fitPreview() {
+    var center = document.querySelector('.builder-center');
+    var container = document.getElementById('preview-scale-container');
+    var wrapper = document.getElementById('preview-wrapper');
+    if (!center || !container || !wrapper) return;
+
+    var A4_W_PX = 794; // 210mm at 96dpi
+    var A4_H_PX = 1123; // 297mm at 96dpi
+    var padding = 48; // 24px each side
+    var availW = center.clientWidth - padding;
+
+    var scale = Math.min(1, availW / A4_W_PX);
+    scale = Math.max(0.3, scale); // floor at 30%
+
+    // Set CSS variable on both elements
+    container.style.setProperty('--preview-scale', scale);
+    wrapper.style.setProperty('--preview-scale', scale);
+
+    // Size the outer container to match scaled dimensions
+    container.style.width  = (A4_W_PX * scale) + 'px';
+    container.style.minHeight = (A4_H_PX * scale) + 'px';
+  }
+
+  window.addEventListener('load', fitPreview);
+  window.addEventListener('resize', fitPreview);
+
+  // Also refit whenever sidebar expands/collapses
+  var _origExpand = window._sidebarExpand;
+  document.addEventListener('DOMContentLoaded', function() {
+    var sb = document.querySelector('.sidebar');
+    if (sb) {
+      sb.addEventListener('mouseenter', function(){ setTimeout(fitPreview, 260); });
+      sb.addEventListener('mouseleave', function(){ setTimeout(fitPreview, 260); });
+    }
+    fitPreview();
+  });
   </script>
 </body>
 </html>
